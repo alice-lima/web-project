@@ -1,0 +1,223 @@
+body.center-form {
+  min-height: 100vh;
+}
+
+div.center-form {
+  position: relative;
+  min-height: 100vh;
+}
+
+div.center-form > form {
+  /* background-color: #e3f2fd;
+	background-color: #B4EEB4;*/
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateY(-50%) translateX(-50%);
+}
+
+#colorir {
+  background-color: #e3f2fd;
+}
+
+.visivel {
+  visibility: visible;
+}
+.invisivel {
+  display: none;
+}
+
+div.direita {
+  float: right;
+  width: 48%;
+}
+
+div.esquerda {
+  float: left;
+  width: 48%;
+}
+
+.end-tel {
+  padding: 1%;
+}
+
+.center {
+  width: 100vw;
+  height: 80vh;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.box {
+  width: 120vw;
+  height: 500px;
+  margin-left: 25%;
+  margin-right: 25%;
+  margin-top: 50px;
+}
+
+.fontDate {
+  font-family: "Open Sans", sans-serif;
+  font-weight: bold;
+  margin-right: 20px;
+  float: right;
+}
+
+.topoDireito {
+  position: absolute;
+  bottom: 0;
+  right: 85px;
+  width: 190px;
+  top: 10px;
+}
+
+.margemEsquerda {
+  margin-left: 20px;
+}
+
+.margemDireita {
+  margin-right: 20px;
+}
+
+.quadrado {
+  margin-left: 20px;
+  margin-right: 20px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+*::after {
+  box-sizing: border-box;
+}
+
+.erro {
+  font-size: 12px;
+  color: red;
+  float: right;
+  display: none;
+  margin-right: 15px;
+}
+
+#lblData {
+  width: 220px;
+}
+
+.input-outros {
+  width: 80%;
+}
+
+.btn-info {
+  width: 100%;
+  border-radius: 40px;
+}
+
+.card-deck .deck-buttoons {
+  width: 100%;
+}
+
+#seguir {
+  float: right;
+  margin-right: 50px;
+}
+
+.my-nav {
+  background-color: #e3f2fd;
+}
+
+.btn-topo {
+  border: 0;
+  background-color: transparent;
+  float: right;
+  margin-right: 1%;
+}
+
+.index {
+  width: 25rem;
+}
+
+.paciente-form {
+  width: 48%;
+}
+
+.entrar {
+  width: 100%;
+  border-radius: 20px;
+  margin-top: 5%;
+}
+
+.alinhamento {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-top: -5%;
+}
+
+.margemInferior {
+  margin-bottom: 10px;
+}
+
+.margemEnd {
+  float: right;
+  width: 60%;
+}
+
+#topo {
+  padding: 1%;
+  width: 98%;
+  margin: 1%;
+  display: flex;
+  justify-content: space-between;
+}
+
+#pacienteIcon {
+  width: 75%;
+  height: 75%;
+}
+
+#condicaoAtual {
+  margin-bottom: 1rem;
+}
+
+.linha {
+  display: flex;
+  flex-direction: row;
+  padding: 0 2% 2% 2%;
+  justify-content: space-between;
+}
+
+#final {
+  padding: 1%;
+  margin: 1%;
+  display: flex;
+  width: 98%;
+  flex-direction: column;
+}
+
+#btnFinalizar {
+  display: flex;
+  padding: 1%;
+  justify-content: flex-start;
+  flex-direction: row-reverse;
+}
+
+a#icon {
+  color: gray;
+  font-size: 35px;
+}
+
+.login {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 80px;
+}
+
+.btn {
+  border-radius: 20px;
+}
+
+#link {
+color: blue;
+}

@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <!-- Meta tags Obrigatórias -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<title>Paciente</title>
+		<link rel="shortcut icon" href="resources/icon.ico">
+
+	<!-- Bootstrap -->
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+	<link href="css/style.css" rel="stylesheet">
+	
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+	
+	<script src="https://code.jquery.com/jquery-1.11.2.js"></script>
+
+  </head>
+  <body>
+  
+  <nav class="navbar navbar-expand-md navbar-light fixed-top my-nav">
+  	<i class="fas fa-user-injured"></i>
+	<a class="navbar-brand margemEsquerda">Paciente</a>
+		
+		<div class="collapse navbar-collapse" id="navbarCollapse">
+		<ul class="navbar-nav mr-auto">
+		  <li class="nav-item active">
+			<a class="nav-link" href="InicioPaciente.html">Início <span class="sr-only">(current)</span></a>
+		  </li>
+		  <li class="nav-item topoDireito">
+			<output id="lblData" class="form-control"></output>
+		  </li>
+		</ul>
+	</nav>
+	
+	<div id="nav"></div>
+	<br/><br/><br/>
+	
+	<div id="topo" class="card">
+		<div class="card-body">
+		<h5 class="card-header">Dados Pessoais</h5>
+		<div class="form-row">
+			<div class="form-group col-md-6">
+				<label>Nome</label>
+				<input type="text" class="form-control" id="inputNome">
+			</div>
+			
+			<div class="form-group col-md-3">
+				<label>CPF</label>
+				<small id="erroCpf" class="erro">CPF Inválido</small>
+				<input type="text" class="form-control" name="inputcpf" id="inputcpf" maxlength="11" placeholder="Ex.: 111.222.333-44">
+			</div>
+			
+			<div class="form-group col-md-3">
+				<label> Data de Nascimento	</label>
+				<input type="text" class="form-control data" id="nascimento" placeholder="Ex.: dd/mm/aaaa" data-mask="00/00/0000" maxlength="10" autocomplete="off">
+			</div>
+		</div>
+		
+		<div class="form-row">
+			<div class="form-group col-md-6">
+				<label>Nascido em</label>
+				<input type="text" class="form-control" placeholder="Ex.: Cidade" maxlength="100" autocomplete="off">
+			</div>
+			<div class="form-group col-md-3">
+					<label for="inputEstado">Estado</label>
+					<select id="ufNascimento" class="form-control">
+						<option>Selecione</option>
+						<option value="AC">Acre</option>
+						<option value="AL">Alagoas</option>
+						<option value="AP">Amapá</option>
+						<option value="AM">Amazonas</option>
+						<option value="BA">Bahia</option>
+						<option value="CE">Ceará</option>
+						<option value="DF">Distrito Federal</option>
+						<option value="ES">Espirito Santo</option>
+						<option value="GO">Goiás</option>
+						<option value="MA">Maranhão</option>
+						<option value="MS">Mato Grosso do Sul</option>
+						<option value="MT">Mato Grosso</option>
+						<option value="MG">Minas Gerais</option>
+						<option value="PA">Pará</option>
+						<option value="PB">Paraíba</option>
+						<option value="PR">Paraná</option>
+						<option value="PE">Pernambuco</option>
+						<option value="PI">Piauí</option>
+						<option value="RJ">Rio de Janeiro</option>
+						<option value="RN">Rio Grande do Norte</option>
+						<option value="RS">Rio Grande do Sul</option>
+						<option value="RO">Rondônia</option>
+						<option value="RR">Roraima</option>
+						<option value="SC">Santa Catarina</option>
+						<option value="SP">São Paulo</option>
+						<option value="SE">Sergipe</option>
+						<option value="TO">Tocantins</option>
+					</select>
+				</div>
+
+			<div class="form-group col-md-3">
+			<label>País</label>
+			<input type="text" class="form-control" placeholder="Ex.: País" maxlength="100" autocomplete="off"><br/>
+			</div>
+		</div>
+		
+		<div class="form-row">
+			<div id="end" class="end-tel col-md-7 form-group">
+				<h5 class="card-title">Endereço</h5>
+				<div class="form-row">
+					<div class="form-group col-md-4">
+						<label for="cep">CEP</label>
+						<input type="text" class="form-control cep" placeholder="Ex.: 00000-000" cep-mask="00000-000" maxlength="10" autocomplete="off" id="cep">
+					</div>
+					<div class="form-group col-md-4">
+						<label for="cidade">Cidade</label>
+						<input type="text" class="form-control" id="cidade">
+					</div>
+
+					<div class="form-group col-md-4">
+						<label>Estado</label>
+						<select id="uf" class="form-control">
+							<option>Selecione</option>
+							<option value="AC">Acre</option>
+							<option value="AL">Alagoas</option>
+							<option value="AP">Amapá</option>
+							<option value="AM">Amazonas</option>
+							<option value="BA">Bahia</option>
+							<option value="CE">Ceará</option>
+							<option value="DF">Distrito Federal</option>
+							<option value="ES">Espirito Santo</option>
+							<option value="GO">Goiás</option>
+							<option value="MA">Maranhão</option>
+							<option value="MS">Mato Grosso do Sul</option>
+							<option value="MT">Mato Grosso</option>
+							<option value="MG">Minas Gerais</option>
+							<option value="PA">Pará</option>
+							<option value="PB">Paraíba</option>
+							<option value="PR">Paraná</option>
+							<option value="PE">Pernambuco</option>
+							<option value="PI">Piauí</option>
+							<option value="RJ">Rio de Janeiro</option>
+							<option value="RN">Rio Grande do Norte</option>
+							<option value="RS">Rio Grande do Sul</option>
+							<option value="RO">Rondônia</option>
+							<option value="RR">Roraima</option>
+							<option value="SC">Santa Catarina</option>
+							<option value="SP">São Paulo</option>
+							<option value="SE">Sergipe</option>
+							<option value="TO">Tocantins</option>
+						</select>
+					</div>
+
+				</div>
+					
+				<div class="form-row">
+					<div class="form-group col-md-4">
+						<label for="Address">Logradouro</label>
+						<input type="text" class="form-control" id="logradouro">
+					</div>
+					<div class="form-group col-md-4">
+						<label for="Address">Número</label>
+						<input type="number" min="0" class="form-control" id="numero">
+					</div>
+					<div class="form-group col-md-4">
+						<label for="Address">Complemento</label>
+						<input type="text" class="form-control" id="complemento">
+					</div>
+				</div>
+			</div>
+
+			<div class="end-tel col-md-5 form-group">
+				<h5 class="card-title">Telefones</h5>
+				<div class="form-row">
+					<div class="form-group col-md-6">
+						<label>Telefone	residencial</label>
+						<input type="text" class="form-control telefone" placeholder="Ex.: (DDD) 0000-0000" phone-mask="(00)0000-0000" maxlength="13" autocomplete="off">
+					</div>
+					<div class="form-group col-md-6">
+						<label>Telefone	comercial</label>
+						<input type="text" class="form-control celular" placeholder="Ex.: (DDD) 0000-0000" phone-mask="(00)0000-0000" maxlength="13" autocomplete="off">
+					</div>
+				</div>
+				<div class="form-row">
+					<div class="form-group col-md-6">
+						<label>	Telefone celular</label>
+						<input type="text" name="celular" id="celular" class="form-control" placeholder="Ex.: (DDD) 00000-0000" cel-sp-mask="(00)00000-0000" maxlength="14" autocomplete="off">
+					</div>
+					<div class="form-group col-md-6">
+						<label>	Outro</label>
+						<input type="text" class="form-control" placeholder="Ex.: (DDD) 00000-0000" cel-sp-mask="(00)00000-0000" maxlength="14" autocomplete="off">
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	</div>
+
+	<div id="btnFinalizar">
+			<div id="icone">
+					<a id="icon" href="#nav">
+						<i class="fas fa-chevron-circle-up"></i>
+					</a>
+				</div>
+		<!--<a href="Consulta.html">-->
+			<button id="seguir" class="btn btn-primary btn-lg quadrado" onclick="testaCpf()">Continuar</button>
+	</div>
+
+	<script src="js/main.js"></script>
+	
+<!-- jQuery (obrigatório para plugins JavaScript do Bootstrap) -->
+<script src="js/jquery.js"></script>
+<!-- Inclui todos os plugins compilados (abaixo), ou inclua arquivos separadados se necessário -->
+<script src="js/bootstrap.min.js"></script>
+	</body>
+</html>
