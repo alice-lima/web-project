@@ -18,7 +18,7 @@
   <body class="center-form">
   
   <div class="center-form">
-  	<form id="form">
+  	<form id="form" action="/CadMedico" method="post" enctype="application/json">
     	<div class="index">
 	  		<img src="resources/medici.jpg" class="card-img-top">
 				<div>
@@ -27,7 +27,7 @@
 				</div>
 	  		&nbsp &nbsp &nbsp
 				<div class="login">
-					<input id="login" type="text" name="login" class="form-control" placeholder="Login" autocomplete="off"></input>
+					<input id="login" type="text" name="usuario" class="form-control" placeholder="Login" autocomplete="off"></input>
 					<input id="senha" type="password" name="senha" class="form-control" placeholder="Senha" autocomplete="off"></input>
 				</div>
 			</div>
@@ -37,7 +37,7 @@
 		</form>
 	</div>
 	
-	<script src="js/login.js"></script>
+
 	<script src="js/jquery.js"></script>
     <script src="js/bootstrap.min.js"></script>
   </body>
