@@ -1,0 +1,25 @@
+{
+  "name": "projeto-web",
+  "version": "1.0.0",
+  "description": "projeto web para controle hospitalar",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alice-lima/web-project.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/alice-lima/web-project/issues"
+  },
+  "homepage": "https://github.com/alice-lima/web-project#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "ejs": "^2.7.1",
+    "express": "^4.17.1",
+    "mysql2": "^1.7.0"
+  }
+}
