@@ -24,7 +24,7 @@ app.post('/Paciente', function(req, res){
 	}).then(project => {
 		if(project)
 		{
-			res.render("Paciente");
+			res.render("CadMedico");
 		}
 		else
 		{

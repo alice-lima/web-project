@@ -94,6 +94,7 @@ function salvarMedico(){
     let medico = getInfoMedico();
 
     inserirLinha(medico);
+    document.getElementById("formCad").submit();
 }
 
 function inserirLinha(medico){

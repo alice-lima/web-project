@@ -29,22 +29,23 @@
 	<br/><br/><br/>
 	
 	<div class="card">
-		<div class="card-body">
+		<form class="card-body"  action="/CadMedico" method="post" enctype="application/json" id="formCad">
 		<h5 class="card-header">Dados Pessoais</h5>
 		<div class="form-row">
 			<div class="form-group col-md-6">
 				<label>Nome</label>
-				<input type="text" class="form-control" id="inputNome">
+				<input name="nome" type="text" class="form-control" id="inputNome">
 			</div>
 			
 			<div class="form-group col-md-3">
 				<label> Data de Nascimento	</label>
-				<input id="nascimento" type="text" class="form-control" placeholder="Ex.: dd/mm/aaaa" data-mask="00/00/0000" maxlength="10" autocomplete="off">
+				<input name="dataNasc" id="nascimento" type="text" class="form-control" placeholder="Ex.: dd/mm/aaaa" data-mask="00/00/0000" maxlength="10" autocomplete="off">
             </div>
             <div class="form-group col-md-3">
                 <label>CPF</label>
                 <small id="mensagem" ></small>
                 <input
+                    name="cpf"
                     type="text"
                     class="form-control" 
                     id="cpf" 
@@ -58,11 +59,11 @@
 
                 <div class="form-group col-md-4">
                     <label>CRM</label>
-                    <input type="text" class="form-control" id="crm" placeholder="Ex.: 111.222.333-44">
+                    <input name="crm" type="text" class="form-control" id="crm" placeholder="Ex.: 111.222.333-44">
                 </div>
                 <div class="form-group col-md-4">
                     <label>UF</label>
-                    <select id="uf" class="form-control">
+                    <select name="uf" id="uf" class="form-control">
                         <option>Selecione</option>
                         <option value="AC">Acre</option>
                         <option value="AL">Alagoas</option>
@@ -95,7 +96,7 @@
                 </div>
             <div id="escol" class="form-group col-md-4">
                 <label>Especialidade</label>
-                <select id="especialidade" class="form-control">
+                <select name="especialidade" id="especialidade" class="form-control">
                     <option>Selecione</option>
                     <option value="Cardiologista">Cardiologista</option>
                     <option value="Cirurgião Geral">Cirurgião Geral</option>
@@ -115,19 +116,23 @@
         <div class="form-row">
             <div class="form-group col-md-4">
                 <label for="residencial">Telefone	residencial</label>
-                <input id="residencial" type="text" class="form-control" placeholder="Ex.: (DDD) 0000-0000" phone-mask="(00)0000-0000" maxlength="13" autocomplete="off">
+                <input name="telResidencial" id="residencial" type="text" class="form-control" placeholder="Ex.: (DDD) 0000-0000" phone-mask="(00)0000-0000" maxlength="13" autocomplete="off">
             </div>
             <div class="form-group col-md-4">
                 <label for="celular">	Telefone celular	</label>
-                <input id="celular" type="text" class="form-control" placeholder="Ex.: (DDD) 00000-0000" cel-sp-mask="(00)00000-0000" maxlength="14" autocomplete="off">
+                <input name="telCelular" id="celular" type="text" class="form-control" placeholder="Ex.: (DDD) 00000-0000" cel-sp-mask="(00)00000-0000" maxlength="14" autocomplete="off">
             </div>
             <div class="form-group col-md-4">
                     <label for="outro">	Outro	</label>
-                    <input id="outro" type="text" class="form-control" placeholder="Ex.: (DDD) 00000-0000" cel-sp-mask="(00)00000-0000" maxlength="14" autocomplete="off">
+                    <input name="telOutro" id="outro" type="text" class="form-control" placeholder="Ex.: (DDD) 00000-0000" cel-sp-mask="(00)00000-0000" maxlength="14" autocomplete="off">
                 </div>
         </div>
 
-        <div id ="final">
+        <div class="form justifyContentEnd">
+            <button class="btn btn-primary btn-lg" onclick="salvarMedico()">Salvar</button>
+        </div>
+	</form>
+	<div id ="final">
             <div class="form-group col-md-12">
                 <div class="card">
                     <div class="card-body">
@@ -146,20 +151,16 @@
                                         <th>Tel Residencial</th>
                                         <th>Celular</th>
                                         <th>Outro</th>
-                                    </tr>	
+                                    </tr>   
                                 </thead>
                             </table>
                         </div>
                     </div>
                 </div>
             </div>
-	</div>
-	
 </div>
 
-	<div class="form justifyContentEnd">
-		<button class="btn btn-primary btn-lg" onclick="salvarMedico()">Salvar</button>
-	</div>
+
 	
 	<script src="js/cadMedico.js"></script>
 
