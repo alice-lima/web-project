@@ -56,7 +56,7 @@ $("#cep").blur(function() {
     //Aqui você deve preencher o tipo de dados que será lido,
     //no caso, estamos lendo JSON.
     dataType: "json",
-    //SUCESS é referente a função que será executada caso
+    //SUCCESS é referente a função que será executada caso
     //ele consiga ler a fonte de dados com sucesso.
     //O parâmetro dentro da função se refere ao nome da variável
     //que você vai dar para ler esse objeto.
@@ -76,50 +76,4 @@ $("#cep").blur(function() {
   });
 });
 
-/* Função para validar o CPF */
-function testaCpf() {
-  var strCPF = $("#inputcpf").val();
-  TestaCPF(strCPF);
-}
 
-function TestaCPF(strCPF) {
-  var Soma;
-  var Resto;
-
-  Soma = 0;
-  if (strCPF == "00000000000") {
-    return mudarBorda();
-  }
-
-  for (i = 1; i <= 9; i++)
-    Soma = Soma + parseInt(strCPF.substring(i - 1, i)) * (11 - i);
-  Resto = (Soma * 10) % 11;
-
-  if (Resto == 10 || Resto == 11) Resto = 0;
-  if (Resto != parseInt(strCPF.substring(9, 10))) {
-    return mudarBorda();
-  }
-
-  Soma = 0;
-  for (i = 1; i <= 10; i++)
-    Soma = Soma + parseInt(strCPF.substring(i - 1, i)) * (12 - i);
-  Resto = (Soma * 10) % 11;
-
-  if (Resto == 10 || Resto == 11) Resto = 0;
-
-  if (Resto != parseInt(strCPF.substring(10, 11))) {
-    return mudarBorda();
-  }
-
-  return "CPF válido";
-}
-
-function mudarBorda() {
-  $("#inputcpf").addClass("border-danger");
-  $("#inputcpf").focus();
-  show(erroCpf);
-}
-
-function cursor(outros) {
-  $(outros).focus();
-}

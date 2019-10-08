@@ -47,8 +47,16 @@
 			
 			<div class="form-group col-md-3">
 				<label>CPF</label>
-				<small id="erroCpf" class="erro">CPF Inválido</small>
-				<input type="text" class="form-control" name="inputcpf" id="inputcpf" maxlength="11" placeholder="Ex.: 111.222.333-44">
+				<small id="mensagem" ></small>
+				<input
+					type="text"
+					class="form-control" 
+					name="inputcpf" 
+					id="inputcpf" 
+					maxlength="11" 
+					placeholder="Ex.: 111.222.333-44"
+					onblur="validaCpf()";
+				>
 			</div>
 			
 			<div class="form-group col-md-3">
@@ -60,7 +68,7 @@
 		<div class="form-row">
 			<div class="form-group col-md-6">
 				<label>Nascido em</label>
-				<input type="text" class="form-control" placeholder="Ex.: Cidade" maxlength="100" autocomplete="off">
+				<input id="cidadeNasc" type="text" class="form-control" placeholder="Ex.: Cidade" maxlength="100" autocomplete="off">
 			</div>
 			<div class="form-group col-md-3">
 					<label for="inputEstado">Estado</label>
@@ -98,7 +106,7 @@
 
 			<div class="form-group col-md-3">
 			<label>País</label>
-			<input type="text" class="form-control" placeholder="Ex.: País" maxlength="100" autocomplete="off"><br/>
+			<input id="paisNasc" type="text" class="form-control" placeholder="Ex.: País" maxlength="100" autocomplete="off"><br/>
 			</div>
 		</div>
 		
@@ -153,15 +161,15 @@
 					
 				<div class="form-row">
 					<div class="form-group col-md-4">
-						<label for="Address">Logradouro</label>
+						<label for="logradouro">Logradouro</label>
 						<input type="text" class="form-control" id="logradouro">
 					</div>
 					<div class="form-group col-md-4">
-						<label for="Address">Número</label>
+						<label for="numero">Número</label>
 						<input type="number" min="0" class="form-control" id="numero">
 					</div>
 					<div class="form-group col-md-4">
-						<label for="Address">Complemento</label>
+						<label for="complemento">Complemento</label>
 						<input type="text" class="form-control" id="complemento">
 					</div>
 				</div>
@@ -171,22 +179,22 @@
 				<h5 class="card-title">Telefones</h5>
 				<div class="form-row">
 					<div class="form-group col-md-6">
-						<label>Telefone	residencial</label>
-						<input type="text" class="form-control telefone" placeholder="Ex.: (DDD) 0000-0000" phone-mask="(00)0000-0000" maxlength="13" autocomplete="off">
+						<label for="residencial">Telefone	residencial</label>
+						<input id="residencial" type="text" class="form-control telefone" placeholder="Ex.: (DDD) 0000-0000" phone-mask="(00)0000-0000" maxlength="13" autocomplete="off">
 					</div>
 					<div class="form-group col-md-6">
-						<label>Telefone	comercial</label>
-						<input type="text" class="form-control celular" placeholder="Ex.: (DDD) 0000-0000" phone-mask="(00)0000-0000" maxlength="13" autocomplete="off">
+						<label for="comercial">Telefone	comercial</label>
+						<input id="comercial" type="text" class="form-control celular" placeholder="Ex.: (DDD) 0000-0000" phone-mask="(00)0000-0000" maxlength="13" autocomplete="off">
 					</div>
 				</div>
 				<div class="form-row">
 					<div class="form-group col-md-6">
-						<label>	Telefone celular</label>
-						<input type="text" name="celular" id="celular" class="form-control" placeholder="Ex.: (DDD) 00000-0000" cel-sp-mask="(00)00000-0000" maxlength="14" autocomplete="off">
+						<label for="celular">	Telefone celular</label>
+						<input id="celular" type="text" name="celular" id="celular" class="form-control" placeholder="Ex.: (DDD) 00000-0000" cel-sp-mask="(00)00000-0000" maxlength="14" autocomplete="off">
 					</div>
 					<div class="form-group col-md-6">
-						<label>	Outro</label>
-						<input type="text" class="form-control" placeholder="Ex.: (DDD) 00000-0000" cel-sp-mask="(00)00000-0000" maxlength="14" autocomplete="off">
+						<label for="outro">	Outro</label>
+						<input id="outro" type="text" class="form-control" placeholder="Ex.: (DDD) 00000-0000" cel-sp-mask="(00)00000-0000" maxlength="14" autocomplete="off">
 					</div>
 				</div>
 			</div>
@@ -201,10 +209,11 @@
 					</a>
 				</div>
 		<!--<a href="Consulta.html">-->
-			<button id="seguir" class="btn btn-primary btn-lg quadrado" onclick="testaCpf()">Continuar</button>
+			<button id="seguir" class="btn btn-primary btn-lg quadrado" onclick="submitForm()">Continuar</button>
 	</div>
 
 	<script src="js/main.js"></script>
+	<script src="js/paciente.js"></script>
 	
 <!-- jQuery (obrigatório para plugins JavaScript do Bootstrap) -->
 <script src="js/jquery.js"></script>

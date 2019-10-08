@@ -214,9 +214,15 @@
 								<label for="tipo">Especialidade Médica</label>
 								<select id="tipo" class="form-control">
 									<option>Selecione</option>
-									<option>Neurologista</option>
-									<option>Psicólogo(a)</option>
-									<option>Nutricionista</option>
+									<option value="Cardiologista">Cardiologista</option>
+									<option value="Cirurgião Geral">Cirurgião Geral</option>
+									<option value="Clínico Geral">Clínico Geral</option>
+									<option value="Gastroenterologia">Gastroenterologia</option>
+									<option value="Neurologista">Neurologista</option>
+									<option value="Oncologista">Oncologista</option>
+									<option value="Ortopedista">Ortopedista</option>
+									<option value="Otorrinolaringologista">Otorrinolaringologista</option>
+									<option value="Pediatria">Pediatria</option>
 								</select>
 							</div>
 							<div class="form-group col-md-6">
@@ -234,8 +240,10 @@
 								<input type="text" class="form-control" id="inputHorario" placeholder="00:00">
 							</div>
 						</div>
-
-						<button class="btn btn-outline-primary col-md-3">Agendar</button>
+						<div class="form-row" id="optRetorno">
+							<button onclick="agendar()" class="btn btn-outline-primary col-md-3">Agendar</button>
+							<a id="openModal" data-toggle="modal" data-target="#modalRetorno">Visualizar</a>
+						</div>
 
 					</div>
 				</div>
@@ -299,8 +307,56 @@
 
 			<button class="btn btn-primary btn-lg margemDireita">Encerrar Consulta</button>
 		</div>
-
 	</div>
+
+		<!-- Modal de Informações Retorno -->
+		<div class="modal fade" id="modalRetorno" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+				<div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+				  <div class="modal-content">
+					<div class="modal-header">
+					  <h5 class="modal-title" id="exampleModalCenterTitle">Retornos Agendados</h5>
+					  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					  </button>
+					</div>
+					<div class="modal-body">
+					  <div class="form-row">
+						<div class="form-group col-md-5">
+						  <label for="medico">Nome do Médico:</label>
+						  <output id="medico" class="form-control"></output>
+						</div>
+						<div class="form-group col-md-3">
+						  <label for="especialidade">Especialidade Médica:</label>
+						  <output id="especialidade" class="form-control"></output>
+						</div>
+						<div class="form-group col-md-3">
+						  <label for="crm">CRM:</label>
+						  <output id="crm" class="form-control"></output>
+						</div>
+					  </div>
+	  
+					<div class="form-row">
+						<div class="form-group col-md-11">
+						  <label for="dataConsulta">Dia da Consulta:</label>
+						  <output id="dataConsulta" class="form-control"></output>
+						</div>
+					</div>
+					<div class="form-row">
+							<div class="form-group col-md-11">
+							  <label for="horaConsulta">Horário da Consulta:</label>
+							  <output id="horaConsulta" class="form-control"></output>
+							</div>
+					</div>
+	  
+					</div>
+					<div class="modal-footer">
+					  <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+					</div>
+				  </div>
+				</div>
+			  </div>
+	  
+
 		<!-- Modal de Informações -->
 		<div class="modal fade" id="modalInfo" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
 		  <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
@@ -343,11 +399,19 @@
 		  </div>
 		</div>
 
+		<script src="js/consulta.js"></script>
 
   <!-- jQuery (obrigatório para plugins JavaScript do Bootstrap) -->
     <script src="js/jquery.js"></script>
     <!-- Inclui todos os plugins compilados (abaixo), ou inclua arquivos separadados se necessário -->
-    <script src="js/bootstrap.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	
+	<style>
+    	#openModal {
+			display: none;
+			color: #007bff;
+		}
+	</style>
   </body>
 
 </html>

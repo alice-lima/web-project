@@ -96,7 +96,13 @@ div.esquerda {
   font-size: 12px;
   color: red;
   float: right;
-  display: none;
+  margin-right: 15px;
+}
+
+.sucesso {
+  font-size: 12px;
+  color: green;
+  float: right;
   margin-right: 15px;
 }
 
