@@ -106,5 +106,7 @@ function cursor(outros) {
 
 function submitForm(){
     let paciente = getInfoPaciente();
+
+    window.location = `Consulta.html?nome=${paciente.nome}&cpf=${paciente.cpf}&dtNasc=${paciente.dtNascimento}`;
 }
 
