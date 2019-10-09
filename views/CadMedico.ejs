@@ -16,12 +16,12 @@
   <body>
   
   <nav class="navbar navbar-expand-md navbar-light fixed-top" style="background-color: #e3f2fd;">
-		<a class="navbar-brand">AMBULATÓRIO - Médico</a>
+		<a class="navbar-brand">Médico</a>
 		
 		<div class="collapse navbar-collapse" id="navbarCollapse">
 		<ul class="navbar-nav mr-auto">
 		  <li class="nav-item active">
-			<a class="nav-link" href="index.html">Início <span class="sr-only">(current)</span></a>
+			<a class="nav-link" href="Menu.html">Início <span class="sr-only">(current)</span></a>
 		  </li>
 		</ul>
 	</nav>
@@ -128,11 +128,35 @@
                 </div>
         </div>
 
+        
+        <h5 class="card-header">Login</h5>
+        <div class="form-row">
+            <div class="form-group col-md-4">
+                <label for="login">Usuário</label>
+                <input id="login" type="text" class="form-control" placeholder="Usuário" autocomplete="off">
+            </div>
+            <div class="form-group col-md-4">
+                <label for="senha">	Senha	</label>
+                <input id="senha" type="password" class="form-control" placeholder="Senha">
+            </div>
+            <div class="form-group col-md-4">
+                <label for="senhaConf">	Confirme a Senha	</label>
+                <input 
+                    id="senhaConf"
+                    type="password"
+                    class="form-control"
+                    placeholder="Confirmação de Senha"
+                    onblur="validaSenha()"
+                >
+            </div>
+        </div>
+
         <div class="form justifyContentEnd">
             <button class="btn btn-primary btn-lg" onclick="salvarMedico()">Salvar</button>
         </div>
-	</form>
-	<div id ="final">
+    </form>
+
+        <div id ="final">
             <div class="form-group col-md-12">
                 <div class="card">
                     <div class="card-body">

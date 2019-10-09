@@ -122,5 +122,14 @@ function inserirLinha(medico){
 
 }
 
+function validaSenha() {
+  let senha = document.getElementById("senha").value;
+  let confSenha = document.getElementById("senhaConf").value;
 
-
+  if(senha !== confSenha) {
+    alert("As senhas não correspondem.\nInsira a mesma senha nos dois campos.")
+  }
+  else {
+    alert("As senhas correspondem.")
+  }
+}

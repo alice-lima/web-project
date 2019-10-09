@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pt-br">
   <head>
     <!-- Meta tags Obrigatórias -->
@@ -13,33 +13,27 @@
 
 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
 	
-    <title>Boas Vindas</title>
+    <title>Menu</title>
   </head>
   <body class="center-form">
   
   <div class="center-form">
-  	<form id="form" action="/Paciente" method="post" enctype="application/json">
-		<label>Não tem uma conta doutor?</label>
-		<a href="CadMedico.html">Crie agora!</a>
+  	<form id="form">
     	<div class="index">
-	  		<img src="resources/medici.jpg" class="card-img-top">
-				<div>
-					<h5 class="card-title">Bem Vindo!</h5>
-					<p class="card-text">Olá, doutor(a). Vamos começar?</p>
-				</div>
-	  		&nbsp &nbsp &nbsp
-				<div class="login">
-					<input id="login" type="text" name="usuario" class="form-control" placeholder="Login" autocomplete="off"></input>
-					<input id="senha" type="password" name="senha" class="form-control" placeholder="Senha" autocomplete="off"></input>
-				</div>
-			</div>
 			<div class="entrar">
-				<button class="btn btn-info btn-lg" type="submit">Entrar</button>
+                <a href="CadMedico.html" class="btn btn-info btn-lg">
+                    Médicos
+                </a>
+                <a href="Paciente.html" class="btn btn-info btn-lg">
+                    Paciente
+                </a>
+                <a href="Consulta.html" class="btn btn-info btn-lg">
+                    Consulta
+                </a>
 			</div>
 		</form>
 	</div>
 	
-
 	<script src="js/jquery.js"></script>
     <script src="js/bootstrap.min.js"></script>
   </body>

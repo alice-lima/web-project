@@ -34,5 +34,5 @@ function login(usuario) {
 }
 
 function redirect() {
-  window.location.href = "Paciente.html";
+  window.location.href = "Menu.html";
 }
