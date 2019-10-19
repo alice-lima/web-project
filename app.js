@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const Medico = require('./models/Medico');
+const Paciente = require('./models/Paciente');
 
 const app = express();
 
@@ -14,7 +15,10 @@ app.use(express.static('views'));
 app.get('/', function(req, res){
 	res.render('index');
 });
-app.post('/Paciente', function(req, res){
+app.get('/CadMedico', function(req, res){
+	res.render('CadMedico');
+});
+app.post('/Login', function(req, res){
 
 	Medico.findOne({
 		where: {
@@ -33,6 +37,7 @@ app.post('/Paciente', function(req, res){
 	})
 });
 app.post('/CadMedico', function(req, res){
+	console.log(req.body)
 	Medico.create({
 		usuario: req.body.usuario,
 		senha: req.body.senha,
@@ -46,11 +51,49 @@ app.post('/CadMedico', function(req, res){
 		telCelular: req.body.telCelular,
 		telOutro: req.body.telOutro
 	}).then(function(){
-		res.render('CadMedico');
+		console.log("medico inserido com sucesso");
+		res.render("CadMedico");
 	}).catch(function(erro){
 		res.send("Houve um erro: " + erro);
 	})
 });
+
+app.get('/CadPaciente', function(req, res){
+	res.render('Paciente');
+});
+
+app.get('/CadMedico', function(req, res){
+	res.render('CadMedico');
+});
+
+app.post('/CadPaciente', function(req, res){
+	Paciente.create({
+		nome: req.body.nome,
+		cpf: req.body.cpf,
+		dataNasc: req.body.dataNasc,
+		natCidade: req.body.natCidade,
+		natEstado: req.body.natEstado,
+		natPais: req.body.natPais,
+		cep: req.body.cep,
+		cidade: req.body.cidade,
+		estado: req.body.estado,
+		logradouro: req.body.logradouro,
+		numero: req.body.numero,
+		complemento: req.body.complemento,
+		telResidencial: req.body.telResidencial,
+		telComercial: req.body.telComercial,
+		telCelular: req.body.telCelular,
+		telOutro: req.body.telOutro
+	}).then(function(){
+		console.log("Paciente cadastrado com sucesso");
+		res.render("Paciente");
+	}).catch(function(erro){
+		res.send("Houve um erro: " + erro);
+	})
+
+});
+
+
 
 app.listen(8080, function(){
 	console.log("Servidor rodando na porta 8080");
