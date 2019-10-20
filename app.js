@@ -28,7 +28,7 @@ app.post('/Login', function(req, res){
 	}).then(project => {
 		if(project)
 		{
-			res.render("CadMedico");
+			res.render("CadMedico", {login: true});
 		}
 		else
 		{
@@ -62,8 +62,8 @@ app.get('/CadPaciente', function(req, res){
 	res.render('Paciente');
 });
 
-app.get('/CadMedico', function(req, res){
-	res.render('CadMedico');
+app.get('/NovoUsuario', function(req, res){
+	res.render('CadMedico', {login: false});
 });
 
 app.post('/CadPaciente', function(req, res){
