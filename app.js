@@ -16,7 +16,7 @@ app.get('/', function(req, res){
 	res.render('index');
 });
 app.get('/CadMedico', function(req, res){
-	res.render('CadMedico');
+	res.render('CadMedico', {titulo: "Login", endereco: "/"});
 });
 app.post('/Login', function(req, res){
 
@@ -28,7 +28,7 @@ app.post('/Login', function(req, res){
 	}).then(project => {
 		if(project)
 		{
-			res.render("CadMedico", {login: true});
+			res.render("CadMedico", {titulo: "Início", endereco: "/Menu"});
 		}
 		else
 		{
@@ -52,7 +52,7 @@ app.post('/CadMedico', function(req, res){
 		telOutro: req.body.telOutro
 	}).then(function(){
 		console.log("medico inserido com sucesso");
-		res.render("CadMedico");
+		res.render("CadMedico", {titulo: "Login", endereco: "/"});
 	}).catch(function(erro){
 		res.send("Houve um erro: " + erro);
 	})
@@ -62,9 +62,6 @@ app.get('/CadPaciente', function(req, res){
 	res.render('Paciente');
 });
 
-app.get('/NovoUsuario', function(req, res){
-	res.render('CadMedico', {login: false});
-});
 
 app.post('/CadPaciente', function(req, res){
 	Paciente.create({
@@ -93,6 +90,9 @@ app.post('/CadPaciente', function(req, res){
 
 });
 
+app.get('/Menu', function(req, res){
+	res.render('Menu');
+});
 
 
 app.listen(8080, function(){
