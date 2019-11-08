@@ -32,4 +32,4 @@ const PacienteMedicacao = db.sequelize.define('paciente-medicacoes', {
 Paciente.belongsToMany(Medicacao, {through: PacienteMedicacao});
 Medicacao.belongsToMany(Paciente, {through: PacienteMedicacao});
 
-PacienteMedicacao.sync({force:true});
+//PacienteMedicacao.sync({force:true});

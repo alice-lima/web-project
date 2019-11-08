@@ -24,6 +24,6 @@ const Medicacao = db.sequelize.define('medicacoes', {
 
 })
 
-Medicacao.sync({force:true});
+//Medicacao.sync({force:true});
 
 module.exports = Medicacao;

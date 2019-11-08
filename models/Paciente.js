@@ -68,5 +68,5 @@ const Paciente = db.sequelize.define('pacientes', {
 })
 
 
-Paciente.sync({force:true})
+//Paciente.sync({force:true})
 module.exports = Paciente;
