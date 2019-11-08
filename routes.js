@@ -1,8 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const Medico = require('./models/Medico');
-const Paciente = require('./models/Paciente');
-
+const models = require('./models/models');
 
 //rota da página inicial
 router.get('/', function(req, res){
@@ -16,7 +14,7 @@ router.get('/NovoUsuario', function(req, res){
 
 router.post('/Login', function(req, res){
 
-	Medico.findOne({
+	models.Medico.findOne({
 		where: {
 			usuario: req.body.usuario,
 			senha: req.body.senha
@@ -45,7 +43,7 @@ router.get('/CadastrarMedico', function(req, res){
 //rotas da página CadMedico
 router.post('/CadastrarMedico', function(req, res){
 	console.log(req.body)
-	Medico.create({
+	models.Medico.create({
 		usuario: req.body.usuario,
 		senha: req.body.senha,
 		nome: req.body.nome,
@@ -67,7 +65,7 @@ router.post('/CadastrarMedico', function(req, res){
 
 //rotas da página Paciente
 router.post('/CadPaciente', function(req, res){
-	Paciente.create({
+	models.Paciente.create({
 		nome: req.body.nome,
 		cpf: req.body.cpf,
 		dataNasc: req.body.dataNasc,

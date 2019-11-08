@@ -1,6 +1,4 @@
 const db = require('./db');
-const Medicacao = require('./Medicacao');
-const Paciente = require('./Paciente');
 
 const PacienteMedicacao = db.sequelize.define('paciente-medicacoes', {
 	dosagem: {
@@ -29,7 +27,5 @@ const PacienteMedicacao = db.sequelize.define('paciente-medicacoes', {
 
 });
 
-Paciente.belongsToMany(Medicacao, {through: PacienteMedicacao});
-Medicacao.belongsToMany(Paciente, {through: PacienteMedicacao});
 
-//PacienteMedicacao.sync({force:true});
+module.exports = PacienteMedicacao
