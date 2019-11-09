@@ -1,7 +1,7 @@
 const db = require('./db');
 
 const Consulta = db.sequelize.define('consultas', {
-    id: {
+    idConsulta: {
         type:db.Sequelize.INTEGER,
         primaryKey: true,
         autoIncrement: true

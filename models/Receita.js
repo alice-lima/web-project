@@ -1,6 +1,11 @@
 const db = require('./db');
 
-const PacienteMedicacao = db.sequelize.define('paciente-medicacoes', {
+const Receita = db.sequelize.define('receitas', {
+	idReceita: {
+        type:db.Sequelize.INTEGER,
+        primaryKey: true,
+        autoIncrement: true
+    },
 	dosagem: {
 		type: db.Sequelize.REAL
     },
@@ -28,4 +33,4 @@ const PacienteMedicacao = db.sequelize.define('paciente-medicacoes', {
 });
 
 
-module.exports = PacienteMedicacao
+module.exports = Receita;

@@ -1,17 +1,17 @@
 const Medicacao = require('./Medicacao');
 const Paciente = require('./Paciente');
-const PacienteMedicacao = require('./PacienteMedicacao');
+const Receita = require('./Receita');
 const Medico = require('./Medico');
 const Consulta = require('./Consulta');
 
 //para criar as tabelas descomentar os códigos comentados
 
 //criação das tabelas pacientes, medicacoes e paciente-medicacoes
-Paciente.belongsToMany(Medicacao, {through: PacienteMedicacao});
-Medicacao.belongsToMany(Paciente, {through: PacienteMedicacao});
+Paciente.belongsToMany(Medicacao, {through: Receita});
+Medicacao.belongsToMany(Paciente, {through: Receita});
 //Paciente.sync({force:true});
 //Medicacao.sync({force:true});
-//PacienteMedicacao.sync({force:true});
+//Receita.sync({force:true});
 
 //criação da tabela medicos e consultas 
 Paciente.belongsToMany(Medico, {through: Consulta});
@@ -23,7 +23,7 @@ const models = {
     Medico: Medico,
     Paciente: Paciente,
     Medicacao: Medicacao,
-    PacienteMedicacao: PacienteMedicacao,
+    Receita: Receita,
     Consulta: Consulta
 };
 
