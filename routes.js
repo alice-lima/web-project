@@ -32,13 +32,6 @@ router.post('/Login', function(req, res){
 });
 
 //rotas da página menu
-router.get('/CadastrarPaciente', function(req, res){
-	res.render('Paciente');
-});
-
-router.get('/CadastrarMedico', function(req, res){
-	res.render('CadMedico', {titulo: "Início", endereco: "/Menu"});
-});
 
 //rotas da página CadMedico
 router.post('/CadastrarMedico', function(req, res){
@@ -89,9 +82,27 @@ router.post('/CadPaciente', function(req, res){
 		res.send("Houve um erro: " + erro);
 	})
 });
-//rota padrao para a página menu
+//rotas padrao do header
 router.get('/Menu', function(req, res){
 	res.render('Menu');
 });
+
+router.get('/CadastrarPaciente', function(req, res){
+	res.render('Paciente', {titulo: "Paciente"});
+});
+
+router.get('/CadastrarMedico', function(req, res){
+	res.render('CadMedico', {titulo: "Médico", titulo2: "Menu", endereco: "/Menu"});
+});
+
+router.get('/Consulta', function(req, res){
+	res.render('Consulta', {titulo: "Consulta"});
+});
+
+router.get('/PesquisaPaciente', function(req, res){
+	res.render('Consulta');
+});
+
+
 
 module.exports = router;
