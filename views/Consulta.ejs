@@ -20,21 +20,7 @@
   </head>
   <body>
 
-  	<nav class="navbar navbar-expand-md navbar-light fixed-top my-nav">
-  	<i class="fas fa-user-md"></i>
-		<a class="navbar-brand margemEsquerda">Consulta</a>
-		
-		<div class="collapse navbar-collapse" id="navbarCollapse" >
-			<ul class="navbar-nav mr-auto">
-				<li class="nav-item active">
-					<a class="nav-link" href="/Menu">Início <span class="sr-only">(current)</span></a>
-			 	</li>
-			  <li class="nav-item topoDireito">
-					<output id="lblData" class="form-control"></output>
-		  	</li>
-	    	</ul>
-    	</div>	
-	</nav>
+	<%include ./partials/header %>
 	
 	<div id="nav"></div>
 	<br/><br/><br/>
@@ -193,8 +179,8 @@
 					<a data-toggle="modal" data-target="#modalInfo">
 					<img class="card-img-top" src="resources/patient_login.png" alt="Imagem paciente" id="pacienteIcon">
 		  			<div class="card-body">
-				    	<h5 id="nomePaciente" class="card-title"><%= nome %></h5>
-				    	<h6 id="cpfPaciente" class="card-subtitle mb-2 text-muted"><%= cpf %></h6>
+				    	<h5 id="nomePaciente" class="card-title"><%= dados.nome %></h5>
+				    	<h6 id="cpfPaciente" class="card-subtitle mb-2 text-muted"><%= dados.cpf %></h6>
 					</div>
 					</a>
 				</div>
@@ -360,15 +346,15 @@
 		        <div class="form-row">
 		          <div class="form-group col-md-5">
 		            <label>Nome:</label>
-		            <output id = "inputNome" class="form-control"><%= nome %></output>
+		            <output id = "inputNome" class="form-control"><%= dados.nome %></output>
 		          </div>
 		          <div class="form-group col-md-3">
 		            <label>CPF:</label>
-		            <output id = "inputCpf" class="form-control"><%= cpf %></output>
+		            <output id = "inputCpf" class="form-control"><%= dados.cpf %></output>
 		          </div>
 		          <div class="form-group col-md-3">
 		            <label>Data de Nascimento:</label>
-		            <output id = "inputDtNasc" class="form-control"><%= dataNasc %></output>
+		            <output id = "inputDtNasc" class="form-control"><%= dados.dataNasc %></output>
 		          </div>
 		        </div>
 

@@ -110,7 +110,7 @@ router.post('/PesquisaPaciente', function(req, res){
 
 		if(project)
 		{
-			res.render('Consulta', project.dataValues);
+			res.render('Consulta', {dados: project.dataValues, titulo: 'Consulta'});
 		}
 		else
 		{
