@@ -36,96 +36,43 @@
 	<div id="nav"></div>
 	<br/><br/><br/>
 	
-	<div id="topo" class="card">
+	<form action="/CadastrarPaciente" method="post" enctype="application/json" id="topo" class="card">
 		<div class="card-body">
-		<h5 class="card-header">Dados Pessoais</h5>
-		<div class="form-row">
-			<div class="form-group col-md-6">
-				<label>Nome</label>
-				<input type="text" class="form-control" id="inputNome">
-			</div>
-			
-			<div class="form-group col-md-3">
-				<label>CPF</label>
-				<small id="mensagem" ></small>
-				<input
-					type="text"
-					class="form-control" 
-					name="inputcpf" 
-					id="inputcpf" 
-					maxlength="11" 
-					placeholder="Ex.: 111.222.333-44"
-					onblur="validaCpf()";
-				>
-			</div>
-			
-			<div class="form-group col-md-3">
-				<label> Data de Nascimento	</label>
-				<input type="text" class="form-control data" id="nascimento" placeholder="Ex.: dd/mm/aaaa" data-mask="00/00/0000" maxlength="10" autocomplete="off">
-			</div>
-		</div>
-		
-		<div class="form-row">
-			<div class="form-group col-md-6">
-				<label>Nascido em</label>
-				<input id="cidadeNasc" type="text" class="form-control" placeholder="Ex.: Cidade" maxlength="100" autocomplete="off">
-			</div>
-			<div class="form-group col-md-3">
-					<label for="inputEstado">Estado</label>
-					<select id="ufNascimento" class="form-control">
-						<option>Selecione</option>
-						<option value="AC">Acre</option>
-						<option value="AL">Alagoas</option>
-						<option value="AP">Amapá</option>
-						<option value="AM">Amazonas</option>
-						<option value="BA">Bahia</option>
-						<option value="CE">Ceará</option>
-						<option value="DF">Distrito Federal</option>
-						<option value="ES">Espirito Santo</option>
-						<option value="GO">Goiás</option>
-						<option value="MA">Maranhão</option>
-						<option value="MS">Mato Grosso do Sul</option>
-						<option value="MT">Mato Grosso</option>
-						<option value="MG">Minas Gerais</option>
-						<option value="PA">Pará</option>
-						<option value="PB">Paraíba</option>
-						<option value="PR">Paraná</option>
-						<option value="PE">Pernambuco</option>
-						<option value="PI">Piauí</option>
-						<option value="RJ">Rio de Janeiro</option>
-						<option value="RN">Rio Grande do Norte</option>
-						<option value="RS">Rio Grande do Sul</option>
-						<option value="RO">Rondônia</option>
-						<option value="RR">Roraima</option>
-						<option value="SC">Santa Catarina</option>
-						<option value="SP">São Paulo</option>
-						<option value="SE">Sergipe</option>
-						<option value="TO">Tocantins</option>
-					</select>
+			<h5 class="card-header">Dados Pessoais</h5>
+			<div class="form-row">
+				<div class="form-group col-md-6">
+					<label>Nome</label>
+					<input name="nome" type="text" class="form-control" id="inputNome">
 				</div>
-
-			<div class="form-group col-md-3">
-			<label>País</label>
-			<input id="paisNasc" type="text" class="form-control" placeholder="Ex.: País" maxlength="100" autocomplete="off"><br/>
+				
+				<div class="form-group col-md-3">
+					<label>CPF</label>
+					<small id="mensagem" ></small>
+					<input
+						type="text"
+						class="form-control" 
+						name="cpf" 
+						id="inputcpf" 
+						maxlength="11" 
+						placeholder="Ex.: 111.222.333-44"
+						onblur="validaCpf()";
+					>
+				</div>
+				
+				<div class="form-group col-md-3">
+					<label> Data de Nascimento	</label>
+					<input type="text" name="dataNasc" class="form-control data" id="nascimento" placeholder="Ex.: dd/mm/aaaa" data-mask="00/00/0000" maxlength="10" autocomplete="off">
+				</div>
 			</div>
-		</div>
-		
-		<div class="form-row">
-			<div id="end" class="end-tel col-md-7 form-group">
-				<h5 class="card-title">Endereço</h5>
-				<div class="form-row">
-					<div class="form-group col-md-4">
-						<label for="cep">CEP</label>
-						<input type="text" class="form-control cep" placeholder="Ex.: 00000-000" cep-mask="00000-000" maxlength="10" autocomplete="off" id="cep">
-					</div>
-					<div class="form-group col-md-4">
-						<label for="cidade">Cidade</label>
-						<input type="text" class="form-control" id="cidade">
-					</div>
-
-					<div class="form-group col-md-4">
-						<label>Estado</label>
-						<select id="uf" class="form-control">
+			
+			<div class="form-row">
+				<div class="form-group col-md-6">
+					<label>Nascido em</label>
+					<input name="natCidade" id="cidadeNasc" type="text" class="form-control" placeholder="Ex.: Cidade" maxlength="100" autocomplete="off">
+				</div>
+				<div class="form-group col-md-3">
+						<label for="inputEstado">Estado</label>
+						<select name="natEstado" id="ufNascimento" class="form-control">
 							<option>Selecione</option>
 							<option value="AC">Acre</option>
 							<option value="AL">Alagoas</option>
@@ -155,62 +102,116 @@
 							<option value="SE">Sergipe</option>
 							<option value="TO">Tocantins</option>
 						</select>
-					</div>
-
 				</div>
-					
-				<div class="form-row">
-					<div class="form-group col-md-4">
-						<label for="logradouro">Logradouro</label>
-						<input type="text" class="form-control" id="logradouro">
-					</div>
-					<div class="form-group col-md-4">
-						<label for="numero">Número</label>
-						<input type="number" min="0" class="form-control" id="numero">
-					</div>
-					<div class="form-group col-md-4">
-						<label for="complemento">Complemento</label>
-						<input type="text" class="form-control" id="complemento">
-					</div>
+
+				<div class="form-group col-md-3">
+				<label>País</label>
+				<input name="natPais" id="paisNasc" type="text" class="form-control" placeholder="Ex.: País" maxlength="100" autocomplete="off"><br/>
 				</div>
 			</div>
+			
+			<div class="form-row">
+				<div id="end" class="end-tel col-md-7 form-group">
+					<h5 class="card-title">Endereço</h5>
+					<div class="form-row">
+						<div class="form-group col-md-4">
+							<label for="cep">CEP</label>
+							<input name="cep" type="text" class="form-control cep" placeholder="Ex.: 00000-000" cep-mask="00000-000" maxlength="10" autocomplete="off" id="cep">
+						</div>
+						<div class="form-group col-md-4">
+							<label for="cidade">Cidade</label>
+							<input name="cidade" type="text" class="form-control" id="cidade">
+						</div>
 
-			<div class="end-tel col-md-5 form-group">
-				<h5 class="card-title">Telefones</h5>
-				<div class="form-row">
-					<div class="form-group col-md-6">
-						<label for="residencial">Telefone	residencial</label>
-						<input id="residencial" type="text" class="form-control telefone" placeholder="Ex.: (DDD) 0000-0000" phone-mask="(00)0000-0000" maxlength="13" autocomplete="off">
+						<div class="form-group col-md-4">
+							<label>Estado</label>
+							<select name="estado" id="uf" class="form-control">
+								<option>Selecione</option>
+								<option value="AC">Acre</option>
+								<option value="AL">Alagoas</option>
+								<option value="AP">Amapá</option>
+								<option value="AM">Amazonas</option>
+								<option value="BA">Bahia</option>
+								<option value="CE">Ceará</option>
+								<option value="DF">Distrito Federal</option>
+								<option value="ES">Espirito Santo</option>
+								<option value="GO">Goiás</option>
+								<option value="MA">Maranhão</option>
+								<option value="MS">Mato Grosso do Sul</option>
+								<option value="MT">Mato Grosso</option>
+								<option value="MG">Minas Gerais</option>
+								<option value="PA">Pará</option>
+								<option value="PB">Paraíba</option>
+								<option value="PR">Paraná</option>
+								<option value="PE">Pernambuco</option>
+								<option value="PI">Piauí</option>
+								<option value="RJ">Rio de Janeiro</option>
+								<option value="RN">Rio Grande do Norte</option>
+								<option value="RS">Rio Grande do Sul</option>
+								<option value="RO">Rondônia</option>
+								<option value="RR">Roraima</option>
+								<option value="SC">Santa Catarina</option>
+								<option value="SP">São Paulo</option>
+								<option value="SE">Sergipe</option>
+								<option value="TO">Tocantins</option>
+							</select>
+						</div>
+
 					</div>
-					<div class="form-group col-md-6">
-						<label for="comercial">Telefone	comercial</label>
-						<input id="comercial" type="text" class="form-control celular" placeholder="Ex.: (DDD) 0000-0000" phone-mask="(00)0000-0000" maxlength="13" autocomplete="off">
+						
+					<div class="form-row">
+						<div class="form-group col-md-4">
+							<label for="logradouro">Logradouro</label>
+							<input name="logradouro" type="text" class="form-control" id="logradouro">
+						</div>
+						<div class="form-group col-md-4">
+							<label for="numero">Número</label>
+							<input name="numero" type="number" min="0" class="form-control" id="numero">
+						</div>
+						<div class="form-group col-md-4">
+							<label for="complemento">Complemento</label>
+							<input name="complemento" type="text" class="form-control" id="complemento">
+						</div>
 					</div>
 				</div>
-				<div class="form-row">
-					<div class="form-group col-md-6">
-						<label for="celular">	Telefone celular</label>
-						<input id="celular" type="text" name="celular" id="celular" class="form-control" placeholder="Ex.: (DDD) 00000-0000" cel-sp-mask="(00)00000-0000" maxlength="14" autocomplete="off">
+
+				<div class="end-tel col-md-5 form-group">
+					<h5 class="card-title">Telefones</h5>
+					<div class="form-row">
+						<div class="form-group col-md-6">
+							<label for="residencial">Telefone	residencial</label>
+							<input name="telResidencial" id="residencial" type="text" class="form-control telefone" placeholder="Ex.: (DDD) 0000-0000" phone-mask="(00)0000-0000" maxlength="13" autocomplete="off">
+						</div>
+						<div class="form-group col-md-6">
+							<label for="comercial">Telefone	comercial</label>
+							<input name="telComercial" id="comercial" type="text" class="form-control celular" placeholder="Ex.: (DDD) 0000-0000" phone-mask="(00)0000-0000" maxlength="13" autocomplete="off">
+						</div>
 					</div>
-					<div class="form-group col-md-6">
-						<label for="outro">	Outro</label>
-						<input id="outro" type="text" class="form-control" placeholder="Ex.: (DDD) 00000-0000" cel-sp-mask="(00)00000-0000" maxlength="14" autocomplete="off">
+					<div class="form-row">
+						<div class="form-group col-md-6">
+							<label for="celular">	Telefone celular</label>
+							<input name="telCelular" id="celular" type="text" name="celular" id="celular" class="form-control" placeholder="Ex.: (DDD) 00000-0000" cel-sp-mask="(00)00000-0000" maxlength="14" autocomplete="off">
+						</div>
+						<div class="form-group col-md-6">
+							<label for="outro">	Outro</label>
+							<input name="telOutro" id="outro" type="text" class="form-control" placeholder="Ex.: (DDD) 00000-0000" cel-sp-mask="(00)00000-0000" maxlength="14" autocomplete="off">
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-	</div>
+		<div id="btnFinalizar">
+			<div id="icone">
+				<a id="icon" href="#nav">
+					<i class="fas fa-chevron-circle-up"></i>
+				</a>
+			</div>
+			<!--<a href="Consulta.html">-->
+			<button id="seguir" type="submit" class="btn btn-primary btn-lg quadrado">Salvar</button>
+		</div>
 	</div>
 
-	<div id="btnFinalizar">
-			<div id="icone">
-					<a id="icon" href="#nav">
-						<i class="fas fa-chevron-circle-up"></i>
-					</a>
-				</div>
-		<!--<a href="Consulta.html">-->
-			<button id="seguir" class="btn btn-primary btn-lg quadrado" onclick="submitForm()">Continuar</button>
-	</div>
+
 
 	<script src="js/main.js"></script>
 	<script src="js/paciente.js"></script>

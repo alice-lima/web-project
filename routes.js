@@ -57,7 +57,7 @@ router.post('/CadastrarMedico', function(req, res){
 });
 
 //rotas da página Paciente
-router.post('/CadPaciente', function(req, res){
+router.post('/CadastrarPaciente', function(req, res){
 	models.Paciente.create({
 		nome: req.body.nome,
 		cpf: req.body.cpf,
@@ -77,7 +77,7 @@ router.post('/CadPaciente', function(req, res){
 		telOutro: req.body.telOutro
 	}).then(function(){
 		console.log("Paciente cadastrado com sucesso");
-		res.render("Paciente");
+		res.render("Menu");
 	}).catch(function(erro){
 		res.send("Houve um erro: " + erro);
 	})
@@ -99,10 +99,25 @@ router.get('/Consulta', function(req, res){
 	res.render('Consulta', {titulo: "Consulta"});
 });
 
-router.get('/PesquisaPaciente', function(req, res){
-	res.render('Consulta');
-});
+router.post('/PesquisaPaciente', function(req, res){
+	console.log(req.body);
+	models.Paciente.findOne({
+		where: {
+			nome: req.body.nome
+		}
+	}).then(project => {
+		console.log(project.dataValues.nome);
 
+		if(project)
+		{
+			res.render('Consulta', project.dataValues);
+		}
+		else
+		{
+			res.render("Menu");
+		}		
+	})
+});
 
 
 module.exports = router;

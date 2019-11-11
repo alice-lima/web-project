@@ -193,8 +193,8 @@
 					<a data-toggle="modal" data-target="#modalInfo">
 					<img class="card-img-top" src="resources/patient_login.png" alt="Imagem paciente" id="pacienteIcon">
 		  			<div class="card-body">
-				    	<h5 id="nomePaciente" class="card-title"></h5>
-				    	<h6 id="cpfPaciente" class="card-subtitle mb-2 text-muted"></h6>
+				    	<h5 id="nomePaciente" class="card-title"><%= nome %></h5>
+				    	<h6 id="cpfPaciente" class="card-subtitle mb-2 text-muted"><%= cpf %></h6>
 					</div>
 					</a>
 				</div>
@@ -360,15 +360,15 @@
 		        <div class="form-row">
 		          <div class="form-group col-md-5">
 		            <label>Nome:</label>
-		            <output id = "inputNome" class="form-control">Pedro Henrique Silva</output>
+		            <output id = "inputNome" class="form-control"><%= nome %></output>
 		          </div>
 		          <div class="form-group col-md-3">
 		            <label>CPF:</label>
-		            <output id = "inputCpf" class="form-control">98317326635</output>
+		            <output id = "inputCpf" class="form-control"><%= cpf %></output>
 		          </div>
 		          <div class="form-group col-md-3">
 		            <label>Data de Nascimento:</label>
-		            <output id = "inputDtNasc" class="form-control">23/06/1999</output>
+		            <output id = "inputDtNasc" class="form-control"><%= dataNasc %></output>
 		          </div>
 		        </div>
 
@@ -388,7 +388,7 @@
 		  </div>
 		</div>
 
-		<script src="js/consulta.js"></script>
+	<!--	<script src="js/consulta.js"></script> -->
 
   <!-- jQuery (obrigatório para plugins JavaScript do Bootstrap) -->
     <script src="js/jquery.js"></script>
