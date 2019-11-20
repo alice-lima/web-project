@@ -4,7 +4,11 @@
     <div class="collapse navbar-collapse" id="navbarCollapse">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <a class="nav-link" href="/Menu"> Inicio <span class="sr-only">(current)</span></a>
+        <% if(titulo=="Login") { %>
+          <a class="nav-link" href="/"> Inicio <span class="sr-only">(current)</span></a>
+        <% } else { %>
+          <a class="nav-link" href="/Menu"> Inicio <span class="sr-only">(current)</span></a>
+        <% } %>
       </li>
     </ul>
 
