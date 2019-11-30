@@ -92,18 +92,19 @@ router.get('/CadastrarPaciente', function(req, res){
 });
 
 router.get('/CadastrarMedico', function(req, res){
-	res.render('CadMedico', {titulo: "Médico", titulo2: "Menu", endereco: "/Menu"});
+	res.render('CadMedico', {titulo: "Médico"});
 });
 
 router.get('/Consulta', function(req, res){
 	res.render('Consulta', {titulo: "Consulta"});
 });
 
-router.post('/PesquisaPaciente', function(req, res){
-	console.log(req.body);
+router.get('/PesquisaPaciente', function(req, res){
+	console.log(req.body.pacienteNome);
+
 	models.Paciente.findOne({
 		where: {
-			nome: req.body.nome
+			nome: req.query.nome
 		}
 	}).then(project => {
 		console.log(project.dataValues.nome);
@@ -116,6 +117,80 @@ router.post('/PesquisaPaciente', function(req, res){
 		{
 			res.render("Menu");
 		}		
+	})
+});
+
+//rotas da página Consulta
+router.post('/AddMedicacaoPaciente', function(req, res){
+	models.Medicacao.findOne({
+		where : {
+			classeTerapeutica: req.body.classeTerapeutica,
+			viaAdministracao: req.body.viaAdministracao,
+			unidade: req.body.unidade,
+		}
+	}).then(medicacao => {
+		console.log(medicacao);
+		models.Receita.findOne({
+			where: {
+				pacienteId: req.body.pacienteId,
+				medicacoId: medicacao.dataValues.id,
+			},
+			limit: 1
+		}).then(receita => {
+			console.log("update");
+			if(receita){
+				var values = {
+					dosagem: req.body.dosagem,
+					frequencia: req.body.frequencia,
+					duracao: req.body.duracao,
+					continuo: req.body.continuo,
+					emUso: req.body.emUso,
+					prescricao: req.body.prescricao};
+				var condition = { where :{
+					pacienteId: receita.pacienteId,
+					medicacoId: receita.medicacoId} };
+				var options = { multi: true };
+				
+				models.Receita.update(values, condition , options); 
+			} else {
+
+				//nem todos os dados sao inseridos
+				models.Receita.create({
+					dosagem: req.body.dosagem,
+					frequencia: req.body.frequencia,
+					duracao: req.body.duracao,
+					continuo: req.body.continuo,
+					emUso: req.body.emUso,
+					prescricao: req.body.prescricao,
+					receita: req.body.receita,
+					pacienteId: req.body.pacienteId,
+					medicacoId: parseInt(medicacao.dataValues.id)
+				});
+			}
+			//query construida incorretamente
+			models.Paciente.findOne({where: {id: req.body.pacienteId}}).then(paciente => {
+				url="/PesquisaPaciente?nome=" + paciente.nome;
+				console.log("Url: " + url);
+				res.redirect(url);
+			});
+		}).catch(erro => {
+			console.log("Houve um erro " + erro);
+		})
+	})
+});
+
+
+router.get('/LoucuraAdicionar', function(req, res){
+	models.Medicacao.create({
+		classeTerapeutica: "Antidepressivos",
+		apresentacao: "",
+		viaAdministracao: "Inalatória",
+		unidade: "Comprimido",
+		posologia: "",
+	}).then(() => {
+		res.render("Menu");
+	}).catch(erro => {
+		console.log("Houve um erro: " + erro);
 	})
 });
 

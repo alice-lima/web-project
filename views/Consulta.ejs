@@ -21,7 +21,7 @@
   <body>
 
 	<%include ./partials/header %>
-	
+
 	<div id="nav"></div>
 	<br/><br/><br/>
 
@@ -63,15 +63,22 @@
 						</div>
 					</div>
 				</div>
-				<div class="card">
-						<div class="card-body">
-							<h5 class="card-header">Nova Prescrição</h5>
+				<form id="form" action="/AddMedicacaoPaciente" method="post" enctype="application/json" class="card">
+					<div>
+						<input name="pacienteId" type="hidden" value= <%= dados.id %> >
+					</div>
+					<div>
+						<input name="pacienteNome" type="hidden" value="Caio">
+					</div>
+
+					<div class="card-body">
+						<h5 class="card-header">Nova Prescrição</h5>
 						</br>
-							<div class="form-row margemSuperior">
+						<div class="form-row margemSuperior">
 							
 								<div class="form-group col-md-4">
 									<label>Classe Terapeutica</label>
-									<select name="terapeutica" class="form-control">
+									<select name="classeTerapeutica" class="form-control">
 										<option>Selecione</option>
 										<option>Anti-hipertensivos</option>
 										<option>Hipolipemiantes</option>
@@ -91,24 +98,24 @@
 								</div>
 								<div class="form-group col-md-4">		
 									<label>Via Administração</label>
-									<select name="administracao" class="form-control">
+									<select name="viaAdministracao" class="form-control">
 										<option>Selecione</option>
 										<option>Oral</option>
 										<option>Inalatória</option>
 										<option>Parenteral</option>
 										<option>Outras</option>
 									</select>
-								</div>
-							</div>
-							<div class="form-row margemSuperior">
+								</div>			
+						</div>
+						<div class="form-row margemSuperior">
 					
 								<div class="form-group  col-md-4">
 									<label>Dosagem</label>
-									<input class="form-control" type="number" placeholder="Ex.: 2" min="1" max="10" autocomplete="off">
+									<input name="dosagem" class="form-control" type="number" placeholder="Ex.: 2" min="1" max="10" autocomplete="off">
 								</div>
 								<div class="form-group col-md-4">
 									<label>Unidade</label>
-									<select name="dosagem" class="form-control">
+									<select name="unidade" class="form-control">
 										<option>Selecione</option>
 										<option>Comprimido</option>
 										<option>Cápsul</option>
@@ -117,56 +124,46 @@
 								</div>
 								<div class="form-group col-md-4">
 									<label>Frequência</label>
-									<input class="form-control" type="number" placeholder="Ex.: 2x" min="1" max="10" autocomplete="off">
+									<input name="frequencia" class="form-control" type="number" placeholder="Ex.: 2x" min="1" max="10" autocomplete="off">
 								</div>
 								
-							</div>
-							<div class="form-row margemSuperior">
-									<div class="form-group col-md-4">
-											<label>Duração</label>
-											<input class="form-control" type="number" placeholder="Ex.: 7 dias" maxlength="20" autocomplete="off" size="7">
-										</div>
-					
+						</div>
+						<div class="form-row margemSuperior">
+								<div class="form-group col-md-4">
+									<label>Duração</label>
+									<input name="duracao" class="form-control" type="number" placeholder="Ex.: 7 dias" maxlength="20" autocomplete="off" size="7">
+								</div>
 								<div class="form-group col-md-4">
 									<label class="form-row">Uso Contínuo</label> 
 									<div class="form-row">
-									<div class="custom-control custom-radio margemEsquerda">
-										<input type="radio" name="rbnCustom" id="rbnNao" class="custom-control-input">
-										<label for="rbnNao" class="custom-control-label"> Não</label>
-									</div>	
-									<div class="custom-control custom-radio margemEsquerda">
-										<input type="radio" name="rbnCustom" id="rbnSim" class="custom-control-input">
-										<label for="rbnSim" class="custom-control-label"> Sim</label>
+										<div class="custom-control custom-radio margemEsquerda">
+											<input type="radio" name="usoContinuo" id="rbnNao" class="custom-control-input">
+											<label for="rbnNao" class="custom-control-label"> Não</label>
+										</div>	
+										<div class="custom-control custom-radio margemEsquerda">
+											<input type="radio" name="usoContinuo" id="rbnSim" class="custom-control-input">
+											<label for="rbnSim" class="custom-control-label"> Sim</label>
+										</div>
 									</div>
 								</div>
-								</div>
-							</div>
-							<div class="form-row margemSuperior">
+						</div>
+						<div class="form-row margemSuperior">
 								<div class="form-group col-md-3">
 									<label>Receita</label>
 									<input class="form-control" type="text"  placeholder="Ex.: 000000000" maxlength="9" autocomplete="off" readonly>
 								</div>	
 								<div class="form-group col-md-3">
 									<label>Prescrição</label>
-									<input class="form-control"type="text" placeholder="Ex.: dd/mm/aaaa" data-mask="00/00/0000" maxlength="10" autocomplete="off">
+									<input name="precricao" class="form-control"type="text" placeholder="Ex.: dd/mm/aaaa" data-mask="00/00/0000" maxlength="10" autocomplete="off">
 								</div>
-							</div>
-						</div>
-						<div class="linha">
-							
-						
-								<button class="btn btn-outline-primary col-md-3">Histórico de Receitas</button>
-						
-
-							<div class="col-md-6"></div>
-
-							
-								<button class="btn btn-outline-primary col-md-3">Gerar Receita</button>
-							
-
 						</div>
 					</div>
-
+					<div class="linha">
+						<button class="btn btn-outline-primary col-md-3">Histórico de Receitas</button>
+						<div class="col-md-6"></div>
+						<button type="submit" class="btn btn-outline-primary col-md-3">Gerar Receita</button>
+					</div>
+				</form>
 				
 			</div>
 

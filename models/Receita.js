@@ -1,11 +1,6 @@
 const db = require('./db');
 
 const Receita = db.sequelize.define('receitas', {
-	idReceita: {
-        type:db.Sequelize.INTEGER,
-        primaryKey: true,
-        autoIncrement: true
-    },
 	dosagem: {
 		type: db.Sequelize.REAL
     },
@@ -27,6 +22,10 @@ const Receita = db.sequelize.define('receitas', {
 	},
 
 	continuo: {
+		type: db.Sequelize.BOOLEAN
+	},
+
+	emUso: {
 		type: db.Sequelize.BOOLEAN
 	},
 

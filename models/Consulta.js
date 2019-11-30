@@ -1,12 +1,7 @@
 const db = require('./db');
 
 const Consulta = db.sequelize.define('consultas', {
-    idConsulta: {
-        type:db.Sequelize.INTEGER,
-        primaryKey: true,
-        autoIncrement: true
-    },
-	data: {
+    data: {
 		type: db.Sequelize.STRING
     },
     
