@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const models = require('./models/models');
+const Paciente = require('./controller/PacienteController');
+const Receita = require('./controller/ReceitaController');
 
 //rota da página inicial
 router.get('/', function(req, res){
@@ -58,25 +60,7 @@ router.post('/CadastrarMedico', function(req, res){
 
 //rotas da página Paciente
 router.post('/CadastrarPaciente', function(req, res){
-	models.Paciente.create({
-		nome: req.body.nome,
-		cpf: req.body.cpf,
-		dataNasc: req.body.dataNasc,
-		natCidade: req.body.natCidade,
-		natEstado: req.body.natEstado,
-		natPais: req.body.natPais,
-		cep: req.body.cep,
-		cidade: req.body.cidade,
-		estado: req.body.estado,
-		logradouro: req.body.logradouro,
-		numero: req.body.numero,
-		complemento: req.body.complemento,
-		telResidencial: req.body.telResidencial,
-		telComercial: req.body.telComercial,
-		telCelular: req.body.telCelular,
-		telOutro: req.body.telOutro
-	}).then(function(){
-		console.log("Paciente cadastrado com sucesso");
+	Paciente.create(req, res).then(() => {
 		res.render("Menu");
 	}).catch(function(erro){
 		res.send("Houve um erro: " + erro);
@@ -100,8 +84,6 @@ router.get('/Consulta', function(req, res){
 });
 
 router.get('/PesquisaPaciente', function(req, res){
-	console.log(req.body.pacienteNome);
-
 	models.Paciente.findOne({
 		where: {
 			nome: req.query.nome
@@ -122,6 +104,7 @@ router.get('/PesquisaPaciente', function(req, res){
 
 //rotas da página Consulta
 router.post('/AddMedicacaoPaciente', function(req, res){
+	console.log(req.body.continuo);
 	models.Medicacao.findOne({
 		where : {
 			classeTerapeutica: req.body.classeTerapeutica,
@@ -139,35 +122,10 @@ router.post('/AddMedicacaoPaciente', function(req, res){
 		}).then(receita => {
 			console.log("update");
 			if(receita){
-				var values = {
-					dosagem: req.body.dosagem,
-					frequencia: req.body.frequencia,
-					duracao: req.body.duracao,
-					continuo: req.body.continuo,
-					emUso: req.body.emUso,
-					prescricao: req.body.prescricao};
-				var condition = { where :{
-					pacienteId: receita.pacienteId,
-					medicacoId: receita.medicacoId} };
-				var options = { multi: true };
-				
-				models.Receita.update(values, condition , options); 
-			} else {
 
-				//nem todos os dados sao inseridos
-				models.Receita.create({
-					dosagem: req.body.dosagem,
-					frequencia: req.body.frequencia,
-					duracao: req.body.duracao,
-					continuo: req.body.continuo,
-					emUso: req.body.emUso,
-					prescricao: req.body.prescricao,
-					receita: req.body.receita,
-					pacienteId: req.body.pacienteId,
-					medicacoId: parseInt(medicacao.dataValues.id)
-				});
+			} else {
+				Receita.create(req, medicacao.dataValues.id);
 			}
-			//query construida incorretamente
 			models.Paciente.findOne({where: {id: req.body.pacienteId}}).then(paciente => {
 				url="/PesquisaPaciente?nome=" + paciente.nome;
 				console.log("Url: " + url);
