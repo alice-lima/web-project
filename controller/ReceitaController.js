@@ -15,8 +15,21 @@ exports.module = {
             medicacoId: medicacaoId
         }
 
-    await Receita.create(receita);;
+    await Receita.create(receita);
     },
+
+    async findByPrimary (pacienteId, medicacoId)
+    {
+        const receita = await Receita.findOne({
+            where: {
+                pacienteId: pacienteId,
+                medicacoId: medicacoId
+            }
+        })
+
+        return receita; 
+    }
+
 
 
 }

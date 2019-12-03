@@ -65,7 +65,7 @@
 				</div>
 				<form id="form" action="/AddMedicacaoPaciente" method="post" enctype="application/json" class="card">
 					<div>
-						<input name="pacienteId" type="hidden" value= <%= dados.id %> >
+						<input name="pacienteId" type="hidden" value= <%= paciente.id %> >
 					</div>
 					<div>
 						<input name="pacienteNome" type="hidden" value="Caio">
@@ -176,8 +176,8 @@
 					<a data-toggle="modal" data-target="#modalInfo">
 					<img class="card-img-top" src="resources/patient_login.png" alt="Imagem paciente" id="pacienteIcon">
 		  			<div class="card-body">
-				    	<h5 id="nomePaciente" class="card-title"><%= dados.nome %></h5>
-				    	<h6 id="cpfPaciente" class="card-subtitle mb-2 text-muted"><%= dados.cpf %></h6>
+				    	<h5 id="nomePaciente" class="card-title"><%= paciente.nome %></h5>
+				    	<h6 id="cpfPaciente" class="card-subtitle mb-2 text-muted"><%= paciente.cpf %></h6>
 					</div>
 					</a>
 				</div>
@@ -356,15 +356,15 @@
 		        <div class="form-row">
 		          <div class="form-group col-md-5">
 		            <label>Nome:</label>
-		            <output id = "inputNome" class="form-control"><%= dados.nome %></output>
+		            <output id = "inputNome" class="form-control"><%= paciente.nome %></output>
 		          </div>
 		          <div class="form-group col-md-3">
 		            <label>CPF:</label>
-		            <output id = "inputCpf" class="form-control"><%= dados.cpf %></output>
+		            <output id = "inputCpf" class="form-control"><%= paciente.cpf %></output>
 		          </div>
 		          <div class="form-group col-md-3">
 		            <label>Data de Nascimento:</label>
-		            <output id = "inputDtNasc" class="form-control"><%= dados.dataNasc %></output>
+		            <output id = "inputDtNasc" class="form-control"><%= paciente.dataNasc %></output>
 		          </div>
 		        </div>
 

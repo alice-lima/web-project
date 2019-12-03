@@ -25,7 +25,7 @@ module.exports = {
         await Paciente.create(paciente);
     },
 
-    /*async update(req, res) {
+    /*  async update(req, res) {
 
     }*/
 }

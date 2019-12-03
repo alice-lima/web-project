@@ -16,6 +16,17 @@ module.exports = {
         return medicacoes;
 
          
+    },
+
+    async findByAtt(req) {
+        const medicacao = await models.Medicacao.findOne({
+            where : {
+                classeTerapeutica: req.body.classeTerapeutica,
+                viaAdministracao: req.body.viaAdministracao,
+                unidade: req.body.unidade,
+            }
+        })
+        return medicacao;
     }
     
 }

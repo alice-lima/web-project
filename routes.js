@@ -2,7 +2,8 @@ const express = require('express');
 const router = express.Router();
 const models = require('./models/models');
 const MedicacaoController = require('./controller/MedicacaoController')
-console.log(models);
+const ReceitaController = require('./controller/MedicacaoController')
+
 //rota da página inicial
 router.get('/', function(req, res){
 	res.render('index');
@@ -115,7 +116,7 @@ router.get('/PesquisaPaciente', function(req, res){
 				}
 			}).then((receitas) => {
 				MedicacaoController.findMedPaciente(receitas).then((medicacoes) => {
-					res.render('Consulta', {dados: paciente.dataValues, receitas: receitas, medicacoes: medicacoes, titulo: 'Consulta'});
+					res.render('Consulta', {paciente: paciente.dataValues, receitas: receitas, medicacoes: medicacoes, titulo: 'Consulta'});
 				})
 				
 			})
@@ -128,21 +129,8 @@ router.get('/PesquisaPaciente', function(req, res){
 
 //rotas da página Consulta
 router.post('/AddMedicacaoPaciente', function(req, res){
-	models.Medicacao.findOne({
-		where : {
-			classeTerapeutica: req.body.classeTerapeutica,
-			viaAdministracao: req.body.viaAdministracao,
-			unidade: req.body.unidade,
-		}
-	}).then(medicacao => {
-		console.log(medicacao);
-		models.Receita.findOne({
-			where: {
-				pacienteId: req.body.pacienteId,
-				medicacoId: medicacao.dataValues.id,
-			},
-			limit: 1
-		}).then(receita => {
+	MedicacaoController.findByAtt(req).then(medicacao => {
+		ReceitaController.findOne().then(receita => {
 			if(receita){
 				/*var values = {
 					dosagem: req.body.dosagem,
@@ -186,7 +174,7 @@ router.post('/AddMedicacaoPaciente', function(req, res){
 
 router.get('/LoucuraAdicionar', function(req, res){
 	models.Medicacao.create({
-		classeTerapeutica: "Hipolipemiantes",
+		classeTerapeutica: "Benzodiazepínicos",
 		apresentacao: "",
 		viaAdministracao: "Oral",
 		unidade: "ml",
