@@ -4,27 +4,36 @@ const Receita = require('./Receita');
 const Medico = require('./Medico');
 const Consulta = require('./Consulta');
 
+
+
 //para criar as tabelas descomentar os códigos comentados
+//async function criarTabelas() {
+    function criarTabelas() {
+//  criação das tabelas pacientes, medicacoes e paciente-medicacoes
+    Paciente.belongsToMany(Medicacao, {through: Receita});
+    Medicacao.belongsToMany(Paciente, {through: Receita});
+//    await Paciente.sync({force:true});
+//    await Medicacao.sync({force:true});
 
-//criação das tabelas pacientes, medicacoes e paciente-medicacoes
-Paciente.belongsToMany(Medicacao, {through: Receita});
-Medicacao.belongsToMany(Paciente, {through: Receita});
-//Paciente.sync({force:true});
-//Medicacao.sync({force:true});
-//Receita.sync({force:true});
 
-//criação da tabela medicos e consultas 
-Paciente.belongsToMany(Medico, {through: Consulta});
-Medico.belongsToMany(Paciente, {through: Consulta});
-//Consulta.sync({force:true});
-//Medico.sync(({force:true}));
+    //criação da tabela medicos e consultas 
+    Paciente.belongsToMany(Medico, {through: Consulta});
+    Medico.belongsToMany(Paciente, {through: Consulta});
 
-const models = {
-    Medico: Medico,
-    Paciente: Paciente,
-    Medicacao: Medicacao,
-    Receita: Receita,
-    Consulta: Consulta
-};
+ //   await Medico.sync(({force:true}));
+ //   Receita.sync({force:true});
+ //   Consulta.sync({force:true});
 
-module.exports = models;
+    return {
+            Medico: Medico,
+            Paciente: Paciente,
+            Medicacao: Medicacao,
+            Receita: Receita,
+            Consulta: Consulta
+    };
+
+}
+
+
+
+module.exports = criarTabelas();

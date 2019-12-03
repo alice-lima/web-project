@@ -1,7 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const models = require('./models/models');
-
+const MedicacaoController = require('./controller/MedicacaoController')
+console.log(models);
 //rota da página inicial
 router.get('/', function(req, res){
 	res.render('index');
@@ -106,15 +107,20 @@ router.get('/PesquisaPaciente', function(req, res){
 		where: {
 			nome: req.query.nome
 		}
-	}).then(project => {
-		console.log(project.dataValues.nome);
-
-		if(project)
-		{
-			res.render('Consulta', {dados: project.dataValues, titulo: 'Consulta'});
+	}).then(paciente => {
+		if(paciente) {
+			models.Receita.findAll({
+				where: {
+					pacienteId: paciente.dataValues.id
+				}
+			}).then((receitas) => {
+				MedicacaoController.findMedPaciente(receitas).then((medicacoes) => {
+					res.render('Consulta', {dados: paciente.dataValues, receitas: receitas, medicacoes: medicacoes, titulo: 'Consulta'});
+				})
+				
+			})
 		}
-		else
-		{
+		else {
 			res.render("Menu");
 		}		
 	})
@@ -137,9 +143,8 @@ router.post('/AddMedicacaoPaciente', function(req, res){
 			},
 			limit: 1
 		}).then(receita => {
-			console.log("update");
 			if(receita){
-				var values = {
+				/*var values = {
 					dosagem: req.body.dosagem,
 					frequencia: req.body.frequencia,
 					duracao: req.body.duracao,
@@ -151,7 +156,8 @@ router.post('/AddMedicacaoPaciente', function(req, res){
 					medicacoId: receita.medicacoId} };
 				var options = { multi: true };
 				
-				models.Receita.update(values, condition , options); 
+				models.Receita.update(values, condition , options); */
+
 			} else {
 
 				//nem todos os dados sao inseridos
@@ -169,9 +175,7 @@ router.post('/AddMedicacaoPaciente', function(req, res){
 			}
 			//query construida incorretamente
 			models.Paciente.findOne({where: {id: req.body.pacienteId}}).then(paciente => {
-				url="/PesquisaPaciente?nome=" + paciente.nome;
-				console.log("Url: " + url);
-				res.redirect(url);
+				res.render("Consulta", {paciente: paciente.dataValues, titulo: "Consulta"});
 			});
 		}).catch(erro => {
 			console.log("Houve um erro " + erro);
@@ -182,10 +186,10 @@ router.post('/AddMedicacaoPaciente', function(req, res){
 
 router.get('/LoucuraAdicionar', function(req, res){
 	models.Medicacao.create({
-		classeTerapeutica: "Antidepressivos",
+		classeTerapeutica: "Hipolipemiantes",
 		apresentacao: "",
-		viaAdministracao: "Inalatória",
-		unidade: "Comprimido",
+		viaAdministracao: "Oral",
+		unidade: "ml",
 		posologia: "",
 	}).then(() => {
 		res.render("Menu");

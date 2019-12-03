@@ -24,11 +24,6 @@ const Receita = db.sequelize.define('receitas', {
 	continuo: {
 		type: db.Sequelize.BOOLEAN
 	},
-
-	emUso: {
-		type: db.Sequelize.BOOLEAN
-	},
-
 });
 
 

@@ -8,7 +8,7 @@ const Medicacao = db.sequelize.define('medicacoes', {
 	apresentacao: {
 		type: db.Sequelize.STRING
 	},
-//corrigir campo ---
+	
 	viaAdministracao: {
 		type: db.Sequelize.STRING
 	},

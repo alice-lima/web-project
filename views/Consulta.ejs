@@ -153,14 +153,14 @@
 									<input class="form-control" type="text"  placeholder="Ex.: 000000000" maxlength="9" autocomplete="off" readonly>
 								</div>	
 								<div class="form-group col-md-3">
-									<label>Prescrição</label>
-									<input name="precricao" class="form-control"type="text" placeholder="Ex.: dd/mm/aaaa" data-mask="00/00/0000" maxlength="10" autocomplete="off">
+									<label>Prescrição</label> 
+									<input name="prescricao" value=<%= new Date().toLocaleDateString("pt-BR") %> class="form-control" type="text" placeholder="Ex.: dd/mm/aaaa" data-mask="00/00/0000" maxlength="10" autocomplete="off">
 								</div>
 						</div>
 					</div>
 					<div class="linha">
 						<button class="btn btn-outline-primary col-md-3">Histórico de Receitas</button>
-						<div class="col-md-6"></div>
+						<div class="col-md-6 "></div>
 						<button type="submit" class="btn btn-outline-primary col-md-3">Gerar Receita</button>
 					</div>
 				</form>
@@ -248,20 +248,33 @@
 							</caption>
 							<thead>
 								<tr>
-									<th>Nome</th>
+									<th>Classe</th>
+									<th>Via Administrativa</th>
+									<th>Unidade</th> 
 									<th>Prescrição</th>
-									<th>Via Administrativa</th> 
 									<th>Dosagem</th>
-									<th>Unidade</th>
 									<th>Frequência</th>
-									<th>Duração</th>
+									<th>Duração(dias)</th>
 									<th>Uso Contínuo</th>
-									<th>Em Uso</th>
 									<th>Ações</th>
 								</tr>	
 							</thead>
 							<tbody>
-									
+								<% receitas.forEach(function(receita, index){ %>
+									<tr>
+										<th><%= medicacoes[index].dataValues.classeTerapeutica %></th>
+										<th><%= medicacoes[index].dataValues.viaAdministracao %></th>
+										<th><%= medicacoes[index].dataValues.unidade %></th>
+										<th><%= receita.dataValues.prescricao %></th>
+										<th><%= receita.dataValues.dosagem %></th>
+										<th><%= receita.dataValues.frequencia %></th>
+										<th><%= receita.dataValues.duracao %></th>
+										<th><%= receita.dataValues.usoContinuo %></th>
+										<th>em falta</th>
+									</tr>	
+								<% }) %>
+								
+								
 							</tbody>
 						</table>
 					</div>
