@@ -31,5 +31,4 @@ exports.module = {
     }
 
 
-
 }
