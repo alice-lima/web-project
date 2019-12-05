@@ -1,7 +1,7 @@
 const models = require("../models/models");
 const Receita = models.Receita;
 
-exports.module = {
+module.exports = {
     async create(req, medicacaoId) {
         const receita = {
             dosagem: req.body.dosagem,
@@ -18,17 +18,24 @@ exports.module = {
     await Receita.create(receita);
     },
 
-    async findByPrimary (pacienteId, medicacoId)
-    {
+    async findByPrimary (pacienteId, medicacoId) {
         const receita = await Receita.findOne({
             where: {
                 pacienteId: pacienteId,
                 medicacoId: medicacoId
             }
-        })
+        });
 
         return receita; 
-    }
+    },
 
-
+    async findByPaciente (pacienteId) {
+        const receitas = await Receita.findAll({
+            where: {
+                pacienteId: pacienteId
+            }
+        });
+        
+        return receitas;
+    },
 }

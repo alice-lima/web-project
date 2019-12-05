@@ -25,7 +25,13 @@ module.exports = {
         await Paciente.create(paciente);
     },
 
-    /*  async update(req, res) {
+      async findByPrimary(id) {
+        const paciente = await Paciente.findOne({
+            where: {
+                id: id
+            }
+        })
 
-    }*/
+        return paciente;
+    }
 }

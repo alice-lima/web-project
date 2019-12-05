@@ -1,8 +1,10 @@
 const express = require('express');
 const router = express.Router();
 const models = require('./models/models');
-const MedicacaoController = require('./controller/MedicacaoController')
-const ReceitaController = require('./controller/ReceitaController')
+const MedicacaoController = require('./controller/MedicacaoController');
+const ReceitaController = require('./controller/ReceitaController');
+const PacienteController = require('./controller/PacienteController');
+
 
 //rota da página inicial
 router.get('/', function(req, res){
@@ -90,15 +92,10 @@ router.get('/PesquisaPaciente', function(req, res){
 		}
 	}).then(paciente => {
 		if(paciente) {
-			models.Receita.findAll({
-				where: {
-					pacienteId: paciente.dataValues.id
-				}
-			}).then((receitas) => {
+			ReceitaController.findByPaciente(paciente.dataValues.id).then((receitas) => {
 				MedicacaoController.findMedPaciente(receitas).then((medicacoes) => {
 					res.render('Consulta', {paciente: paciente.dataValues, receitas: receitas, medicacoes: medicacoes, titulo: 'Consulta'});
 				})
-				
 			})
 		}
 		else {
@@ -110,7 +107,7 @@ router.get('/PesquisaPaciente', function(req, res){
 //rotas da página Consulta
 router.post('/AddMedicacaoPaciente', function(req, res){
 	MedicacaoController.findByAtt(req).then(medicacao => {
-		ReceitaController.findOne().then(receita => {
+		ReceitaController.findByPrimary(req.body.pacienteId, medicacao.dataValues.id).then(receita => {
 			if(receita){
 				/*var values = {
 					dosagem: req.body.dosagem,
@@ -127,11 +124,16 @@ router.post('/AddMedicacaoPaciente', function(req, res){
 				models.Receita.update(values, condition , options); */
 
 			} else {
-				Receita.create(req, medicacao.dataValues.id);
+				ReceitaController.create(req, medicacao.dataValues.id).then(() => {
+					PacienteController.findByPrimary(req.body.pacienteId).then(paciente => {
+						ReceitaController.findByPaciente(paciente.dataValues.id).then(receitas => {
+							MedicacaoController.findMedPaciente(receitas).then(medicacoes => {
+								res.render('Consulta', {paciente: paciente.dataValues, receitas: receitas, medicacoes: medicacoes, titulo: 'Consulta'});
+							})
+						})
+					})
+				});
 			}
-			models.Paciente.findOne({where: {id: req.body.pacienteId}}).then(paciente => {
-				res.render("Consulta", {paciente: paciente.dataValues, titulo: "Consulta"});
-			});
 		}).catch(erro => {
 			console.log("Houve um erro " + erro);
 		})
