@@ -62,7 +62,7 @@ router.post('/CadastrarMedico', function(req, res){
 
 //rotas da página Paciente
 router.post('/CadastrarPaciente', function(req, res){
-	Paciente.create(req, res).then(() => {
+	PacienteController.create(req).then(() => {
 		res.render("Menu");
 	}).catch(function(erro){
 		res.send("Houve um erro: " + erro);
