@@ -1,5 +1,5 @@
-const models = require("../models/models");
-const Receita = models.Receita;
+    const models = require("../models/models");
+    const Receita = models.Receita;
 
 module.exports = {
     async create(req, medicacaoId) {
@@ -38,4 +38,13 @@ module.exports = {
         
         return receitas;
     },
+
+    async delete (req) {
+        await Receita.destroy({
+            where: {
+                pacienteId: req.query.pacienteId,
+                medicacoId: req.query.medicacoId
+            }
+        });
+    }
 }

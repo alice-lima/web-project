@@ -4,7 +4,7 @@ const models = require('./models/models');
 const MedicacaoController = require('./controller/MedicacaoController');
 const ReceitaController = require('./controller/ReceitaController');
 const PacienteController = require('./controller/PacienteController');
-
+const MedicoController = require('./controller/MedicoController');
 
 //rota da página inicial
 router.get('/', function(req, res){
@@ -17,19 +17,16 @@ router.get('/NovoUsuario', function(req, res){
 });
 
 router.post('/Login', function(req, res){
-
 	models.Medico.findOne({
 		where: {
 			usuario: req.body.usuario,
 			senha: req.body.senha
 		}
-	}).then(project => {
-		if(project)
-		{
+	}).then(medico => {
+		if(medico) {
 			res.render('Menu');
 		}
-		else
-		{
+		else {
 			res.render("index", {erro: "Usuário não encontrado"});
 		}
 	})
@@ -40,19 +37,7 @@ router.post('/Login', function(req, res){
 //rotas da página CadMedico
 router.post('/CadastrarMedico', function(req, res){
 	console.log(req.body)
-	models.Medico.create({
-		usuario: req.body.usuario,
-		senha: req.body.senha,
-		nome: req.body.nome,
-		dataNasc: req.body.dataNasc,
-		cpf: req.body.cpf,
-		crm: req.body.crm,
-		uf: req.body.uf,
-		especialidade: req.body.especialidade,
-		telResidencial: req.body.telResidencial,
-		telCelular: req.body.telCelular,
-		telOutro: req.body.telOutro
-	}).then(function(){
+		MedicoController.create(req).then(function(){
 		console.log("medico inserido com sucesso");
 		res.render('Menu');
 	}).catch(function(erro){
@@ -140,6 +125,17 @@ router.post('/AddMedicacaoPaciente', function(req, res){
 	})
 });
 
+router.delete('/ExcluirReceita', function(req, res){
+	ReceitaController.delete(req).then(() => {
+		PacienteController.findByPrimary(req.body.pacienteId).then(paciente => {
+			ReceitaController.findByPaciente(paciente.dataValues.id).then(receitas => {
+				MedicacaoController.findMedPaciente(receitas).then(medicacoes => {
+					res.render('Consulta', {paciente: paciente.dataValues, receitas: receitas, medicacoes: medicacoes, titulo: 'Consulta'});
+				})
+			})
+		})
+	})
+});
 
 router.get('/LoucuraAdicionar', function(req, res){
 	models.Medicacao.create({

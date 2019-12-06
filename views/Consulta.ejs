@@ -270,7 +270,7 @@
 										<th><%= receita.dataValues.frequencia %></th>
 										<th><%= receita.dataValues.duracao %></th>
 										<th><%= receita.dataValues.usoContinuo %></th>
-										<th>em falta</th>
+										<th><a href=<%= ("/ExcluirReceita?pacienteId=" + receita.dataValues.pacienteId + "&medicacoId=" + receita.dataValues.medicacoId) %> >Excluir</a></th>
 									</tr>	
 								<% }) %>
 								
