@@ -40,11 +40,8 @@ module.exports = {
     },
 
     async delete (req) {
-        await Receita.destroy({
-            where: {
-                pacienteId: req.query.pacienteId,
-                medicacoId: req.query.medicacoId
-            }
-        });
+        await this.findByPrimary(req.query.pacienteId, req.query.medicacoId).then(receita => {
+            receita.destroy();
+        })
     }
 }

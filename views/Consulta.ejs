@@ -15,6 +15,7 @@
 
 	<script src="https://code.jquery.com/jquery-1.11.2.js"></script>
 	<script src="js/main.js"></script>
+	<script src="js/consulta.js"></script>
 
   <title>Consulta</title>
   </head>
@@ -270,14 +271,14 @@
 										<th><%= receita.dataValues.frequencia %></th>
 										<th><%= receita.dataValues.duracao %></th>
 										<th><%= receita.dataValues.usoContinuo %></th>
-										<th><a href=<%= ("/ExcluirReceita?pacienteId=" + receita.dataValues.pacienteId + "&medicacoId=" + receita.dataValues.medicacoId) %> >Excluir</a></th>
+										<th><button onclick="deleteReceita( '<%- receita.dataValues.pacienteId + ',' + receita.dataValues.medicacoId %>' )">Excluir</button></th>
 									</tr>	
 								<% }) %>
 								
 								
 							</tbody>
 						</table>
-					</div>
+					</div>''
 				</div>
 			</div>
 		</div>
@@ -384,7 +385,6 @@
 		  </div>
 		</div>
 
-	<!--	<script src="js/consulta.js"></script> -->
 
   <!-- jQuery (obrigatório para plugins JavaScript do Bootstrap) -->
     <script src="js/jquery.js"></script>

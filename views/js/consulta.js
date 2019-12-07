@@ -1,3 +1,4 @@
+/*
 function getInfoRetorno(){
     let nome = document.getElementById("inputMedico").value;
     let especialidade = document.getElementById("tipo").value;
@@ -63,4 +64,14 @@ function getDadosPaciente(parameter) {
     else {   
         return undefined;   
     }   
+}
+*/
+function deleteReceita (ids) {
+    alert(ids);
+    const xhttp = new XMLHttpRequest();
+    idsArray = ids.split(",");
+    const url = "/ExcluirReceita?pacienteId=" + idsArray[0] + "&medicacoId=" + idsArray[1];
+    console.log(url);
+    xhttp.open("DELETE", url);
+    xhttp.send();
 }
