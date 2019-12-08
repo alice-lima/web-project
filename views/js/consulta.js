@@ -67,11 +67,12 @@ function getDadosPaciente(parameter) {
 }
 */
 function deleteReceita (ids) {
-    alert(ids);
     const xhttp = new XMLHttpRequest();
     idsArray = ids.split(",");
     const url = "/ExcluirReceita?pacienteId=" + idsArray[0] + "&medicacoId=" + idsArray[1];
-    console.log(url);
     xhttp.open("DELETE", url);
     xhttp.send();
+    let elemento = ""+idsArray[0]+idsArray[1]
+    console.log(elemento);
+    document.getElementById(elemento).remove();
 }

@@ -113,7 +113,9 @@ router.post('/AddMedicacaoPaciente', function(req, res){
 					PacienteController.findByPrimary(req.body.pacienteId).then(paciente => {
 						ReceitaController.findByPaciente(paciente.dataValues.id).then(receitas => {
 							MedicacaoController.findMedPaciente(receitas).then(medicacoes => {
-								res.render('Consulta', {paciente: paciente.dataValues, receitas: receitas, medicacoes: medicacoes, titulo: 'Consulta'});
+								let pacienteNome = paciente.dataValues.nome.replace(" ", "+");
+								console.log(pacienteNome);
+								res.redirect('/PesquisaPaciente?nome=' + pacienteNome);
 							})
 						})
 					})

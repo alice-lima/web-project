@@ -262,7 +262,7 @@
 							</thead>
 							<tbody>
 								<% receitas.forEach(function(receita, index){ %>
-									<tr>
+									<tr id=<%- receita.dataValues.pacienteId, receita.dataValues.medicacoId %>>
 										<th><%= medicacoes[index].dataValues.classeTerapeutica %></th>
 										<th><%= medicacoes[index].dataValues.viaAdministracao %></th>
 										<th><%= medicacoes[index].dataValues.unidade %></th>
