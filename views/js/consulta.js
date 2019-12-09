@@ -66,13 +66,59 @@ function getDadosPaciente(parameter) {
     }   
 }
 */
+
 function deleteReceita (ids) {
-    const xhttp = new XMLHttpRequest();
+    let xhttp = new XMLHttpRequest();
     idsArray = ids.split(",");
-    const url = "/ExcluirReceita?pacienteId=" + idsArray[0] + "&medicacoId=" + idsArray[1];
+    let url = "/ExcluirReceita?pacienteId=" + idsArray[0] + "&medicacoId=" + idsArray[1];
     xhttp.open("DELETE", url);
     xhttp.send();
     let elemento = ""+idsArray[0]+idsArray[1]
     console.log(elemento);
     document.getElementById(elemento).remove();
+}
+
+function iniciarEdicao(medicacoId){
+    document.getElementById("medicacoId").value = medicacoId;
+    let linhas = document.getElementById(medicacoId);
+    let formButton = document.getElementById("formButton");
+    let classe = document.getElementsByName("classeTerapeutica")[0];
+    let via = document.getElementsByName("viaAdministracao")[0];
+    let unidade = document.getElementsByName("unidade")[0];
+    
+    classe.value = linhas.getElementsByClassName("classeTerapeutica")[0].innerHTML;
+    classe.disabled = "disabled";
+
+    via.value = linhas.getElementsByClassName("viaAdministracao")[0].innerHTML;
+    via.disabled = "disabled";
+
+    unidade.value = linhas.getElementsByClassName("unidade")[0].innerHTML;
+    unidade.disabled = "disabled";
+
+    document.getElementsByName("dosagem")[0].value = linhas.getElementsByClassName("dosagem")[0].innerHTML;   
+    document.getElementsByName("frequencia")[0].value = linhas.getElementsByClassName("frequencia")[0].innerHTML;
+    document.getElementsByName("duracao")[0].value = linhas.getElementsByClassName("duracao")[0].innerHTML;
+    
+    formButton.type = "button";
+    formButton.innerHTML = "Salvar Edição";
+    formButton.addEventListener("click", salvarEdicao, false);
+
+}
+
+function salvarEdicao(){
+    console.log("entrou");
+    let receita = {
+        dosagem: document.getElementsByName("dosagem")[0].value,
+        frequencia: document.getElementsByName("frequencia")[0].value,
+        duracao: document.getElementsByName("duracao")[0].value,
+        prescricao: document.getElementsByName("prescricao")[0].value
+    };
+
+    let jsonReceita = JSON.stringify(receita);
+    let xhr = new XMLHttpRequest();
+
+    let url = "/EditarReceita?pacienteId=" +document.getElementById("pacienteId").value + "&medicacoId=" + document.getElementById("medicacoId").value;
+    xhr.open("PUT", url, true);
+    xhr.setRequestHeader('Content-type','application/json; charset=utf-8');
+    xhr.send(jsonReceita);
 }

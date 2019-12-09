@@ -27,6 +27,16 @@ module.exports = {
             }
         })
         return medicacao;
+    },
+
+    async findByPrimary(medicacoId){
+       const medicacao = await Medicacao.findOne({
+            where: {
+                id: medicacoId
+            }
+        });
+        return medicacao;
+
     }
     
 }
