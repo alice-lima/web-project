@@ -125,11 +125,12 @@ function inserirLinha(medico){
 function validaSenha() {
   let senha = document.getElementById("senha").value;
   let confSenha = document.getElementById("senhaConf").value;
+  let button = document.getElementById("btnSalvar");
 
   if(senha !== confSenha) {
-    alert("As senhas não correspondem.\nInsira a mesma senha nos dois campos.")
+    button.disabled = true;
   }
   else {
-    alert("As senhas correspondem.")
+    button.disabled = false;
   }
 }
