@@ -5,6 +5,7 @@ const MedicacaoController = require('./controller/MedicacaoController');
 const ReceitaController = require('./controller/ReceitaController');
 const PacienteController = require('./controller/PacienteController');
 const MedicoController = require('./controller/MedicoController');
+const RetornoController = require('./controller/RetornoController');
 
 //rota da página inicial
 router.get('/', function(req, res){
@@ -149,5 +150,10 @@ router.put('/EditarReceita', function(req, res){
 	})
 });
 
+router.post('/AgendarRetorno', function(req, res) {
+	RetornoController.create(req)
+	.then(() => res.redirect('Menu'))
+	.catch(erro => console.log("Erro: " + erro))
+})
 
 module.exports = router;

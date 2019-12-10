@@ -150,3 +150,30 @@ function preencherMedico() {
     $("#inputCrm").val(medico.crm);
     $("#inputRetorno").focus();
 }
+
+function agendar() {
+
+    let button = document.getElementById('btnAgendar');
+    button.addEventListener("click", addRetorno, false);
+}
+
+function addRetorno() {
+    let value = document.getElementById('inputMedico').value;
+    let medico = JSON.parse(value);
+
+    let retorno = {
+        data: document.getElementById('inputRetorno').value,
+        hora: document.getElementById('inputHorario').value,
+        pacienteId: document.getElementById("pacienteId").value,
+        medicoId: medico.id
+    }
+
+    let jsonRetorno = JSON.stringify(retorno);
+    let xhr = new XMLHttpRequest();
+
+    let url = "/AgendarRetorno";
+    xhr.open("POST", url, true);
+    xhr.setRequestHeader('Content-type','application/json; charset=utf-8');
+    
+    xhr.send(jsonRetorno);
+}
