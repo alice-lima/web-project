@@ -122,3 +122,12 @@ function salvarEdicao(){
     xhr.setRequestHeader('Content-type','application/json; charset=utf-8');
     xhr.send(jsonReceita);
 }
+
+function preencherMedico() {
+    let value = document.getElementById('inputMedico').value;
+    let medico = JSON.parse(value);
+
+    $("#especialidadeMedico").val(medico.especialidade);
+    $("#inputCrm").val(medico.crm);
+    $("#inputRetorno").focus();
+}
