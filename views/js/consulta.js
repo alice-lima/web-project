@@ -140,4 +140,13 @@ function salvarEdicao(){
     document.getElementsByName("classeTerapeutica")[0].disabled = false;
     document.getElementsByName("viaAdministracao")[0].disabled = false;
     document.getElementsByName("unidade")[0].disabled = false;
-    }
+}
+
+function preencherMedico() {
+    let value = document.getElementById('inputMedico').value;
+    let medico = JSON.parse(value);
+
+    $("#especialidadeMedico").val(medico.especialidade);
+    $("#inputCrm").val(medico.crm);
+    $("#inputRetorno").focus();
+}
