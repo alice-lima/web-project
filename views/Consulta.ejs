@@ -185,11 +185,13 @@
 			<div class="form-group">
 				<div class="card">
 					<div class="card-body">
+						<form id="formRetorno" action="/AgendarRetorno" method="POST" enctype="application/json">
 						<h5 class="card-header">Retorno</h5>
 					</br>
-						<div class="form-group" method="get" enctype="application/json">
+					<input type="hidden" value="<%= paciente.id %>" name="pacienteId" />
+						<div class="form-group" >
 							<label for="inputMedico">Nome do Médico</label>
-							<select class="form-control" id="inputMedico" onchange="preencherMedico()">
+							<select name="medicoId" class="form-control" id="inputMedico" onchange="preencherMedico()">
 									<% medicos.map((medico)=>{%>
 										<option value= "<%= JSON.stringify(medico)%>" ><%= medico.nome %></option>
 									<%}) %>
@@ -198,7 +200,7 @@
 						<div class="form-row">
 							<div class="form-group col-md-6">
 								<label for="tipo">Especialidade Médica</label>
-								<select id="especialidadeMedico" class="form-control">
+	 							<select id="especialidadeMedico" class="form-control">
 									<option value="Cardiologista">Cardiologista</option>
 									<option value="Cirurgião Geral">Cirurgião Geral</option>
 									<option value="Clínico Geral">Clínico Geral</option>
@@ -218,18 +220,18 @@
 						<div class="form-row">
 							<div class="form-group col-md-6">
 								<label for="inputRetorno">Dia da Consulta</label>
-								<input type="text" class="form-control" id="inputRetorno" placeholder="dd/mm/aaaa">
+								<input name="data" type="text" class="form-control" id="inputRetorno" placeholder="dd/mm/aaaa">
 							</div>
 							<div class="form-group col-md-6">
 								<label for="inputHorario">Horário da Consulta</label>
-								<input type="text" class="form-control" id="inputHorario" placeholder="00:00">
+								<input name="hora" type="text" class="form-control" id="inputHorario" placeholder="00:00">
 							</div>
 						</div>
 						<div class="form-row" id="optRetorno">
-							<button onclick="agendar()" class="btn btn-outline-primary col-md-3">Agendar</button>
+							<button id="btnAgendar" type="submit" class="btn btn-outline-primary col-md-3">Agendar</button>
 							<a id="openModal" data-toggle="modal" data-target="#modalRetorno">Visualizar</a>
 						</div>
-
+					</form>
 					</div>
 				</div>
 			</div>

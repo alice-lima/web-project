@@ -22,7 +22,7 @@ module.exports = {
 	
 	async getAll () {
 		const medicos = await Medico.findAll({
-			attributes: ['nome', 'especialidade', 'crm']
+			attributes: ['id', 'nome', 'especialidade', 'crm']
 		})
 
 		return medicos
