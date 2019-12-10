@@ -73,15 +73,16 @@ function deleteReceita (ids) {
     let url = "/ExcluirReceita?pacienteId=" + idsArray[0] + "&medicacoId=" + idsArray[1];
     xhttp.open("DELETE", url);
     xhttp.send();
-    let elemento = ""+idsArray[0]+idsArray[1]
-    console.log(elemento);
-    document.getElementById(elemento).remove();
+    
+    document.getElementById(idsArray[1]).remove();
 }
 
 function iniciarEdicao(medicacoId){
     document.getElementById("medicacoId").value = medicacoId;
     let linhas = document.getElementById(medicacoId);
-    let formButton = document.getElementById("formButton");
+
+    let formButton = document.createElement("button");
+    
     let classe = document.getElementsByName("classeTerapeutica")[0];
     let via = document.getElementsByName("viaAdministracao")[0];
     let unidade = document.getElementsByName("unidade")[0];
@@ -102,6 +103,9 @@ function iniciarEdicao(medicacoId){
     formButton.type = "button";
     formButton.innerHTML = "Salvar Edição";
     formButton.addEventListener("click", salvarEdicao, false);
+    formButton.className = "btn btn-primary";
+    formButton.id = "formButton";
+    document.getElementById("divEdicao").appendChild(formButton);
 
 }
 
@@ -114,11 +118,26 @@ function salvarEdicao(){
         prescricao: document.getElementsByName("prescricao")[0].value
     };
 
+    let linhas = document.getElementById(document.getElementById("medicacoId").value);
+
     let jsonReceita = JSON.stringify(receita);
     let xhr = new XMLHttpRequest();
 
     let url = "/EditarReceita?pacienteId=" +document.getElementById("pacienteId").value + "&medicacoId=" + document.getElementById("medicacoId").value;
     xhr.open("PUT", url, true);
     xhr.setRequestHeader('Content-type','application/json; charset=utf-8');
+    
     xhr.send(jsonReceita);
-}
+
+    linhas.getElementsByClassName("dosagem")[0].innerHTML = receita.dosagem;
+    linhas.getElementsByClassName("frequencia")[0].innerHTML = receita.frequencia;
+    linhas.getElementsByClassName("duracao")[0].innerHTML = receita.duracao;
+    linhas.getElementsByClassName("prescricao")[0].innerHTML = receita.prescricao;
+
+    let formButton = document.getElementById("formButton");
+    formButton.remove();
+
+    document.getElementsByName("classeTerapeutica")[0].disabled = false;
+    document.getElementsByName("viaAdministracao")[0].disabled = false;
+    document.getElementsByName("unidade")[0].disabled = false;
+    }

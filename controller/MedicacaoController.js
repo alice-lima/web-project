@@ -19,7 +19,7 @@ module.exports = {
     },
 
     async findByAtt(req) {
-        const medicacao = await models.Medicacao.findOne({
+        const medicacao = await Medicacao.findOne({
             where : {
                 classeTerapeutica: req.body.classeTerapeutica,
                 viaAdministracao: req.body.viaAdministracao,
