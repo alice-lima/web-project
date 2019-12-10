@@ -5,6 +5,8 @@ module.exports = {
     try {
       const { data, hora, observacoes } = req.body;
 
+      console.log("Consulta =>", req.body);
+
       const consulta = await Consulta.create({
         data,
         hora,

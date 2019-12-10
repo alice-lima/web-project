@@ -45,7 +45,7 @@ routes.post("/Login", function(req, res) {
 //rotas da página menu
 
 //rotas da página CadMedico
-router.post('/CadastrarMedico', function(req, res){
+routes.post('/CadastrarMedico', function(req, res){
 	MedicoController.create(req).then(function(){
 	res.render('Menu');
 	}).catch(function(erro){
@@ -80,7 +80,7 @@ routes.get("/Consulta", function(req, res) {
   res.render("Consulta", { titulo: "Consulta" });
 });
 
-router.get('/PesquisaPaciente', function(req, res){
+routes.get('/PesquisaPaciente', function(req, res){
 	PacienteController.findByName(req).then(paciente => {
 		if(paciente) {
 			ReceitaController.findByPaciente(paciente.dataValues.id).then((receitas) => {
@@ -108,7 +108,7 @@ router.get('/PesquisaPaciente', function(req, res){
 });
 
 //rotas da página Consulta
-router.post('/AddMedicacaoPaciente', function(req, res){
+routes.post('/AddMedicacaoPaciente', function(req, res){
 	MedicacaoController.findByAtt(req).then(medicacao => {
 		ReceitaController.findByPrimary(req.body.pacienteId, medicacao.dataValues.id).then(receita => {
 			if(!receita){
@@ -129,7 +129,7 @@ router.post('/AddMedicacaoPaciente', function(req, res){
 	})
 });
 
-router.delete('/ExcluirReceita', function(req, res){
+routes.delete('/ExcluirReceita', function(req, res){
 	ReceitaController.delete(req).then(() => {
 		PacienteController.findByPrimary(req.query.pacienteId).then(paciente => {
 			res.redirect('/PesquisaPaciente?nome=' + paciente.dataValues.nome);
@@ -153,7 +153,7 @@ routes.get("/LoucuraAdicionar", function(req, res) {
     });
 });
 
-router.put('/EditarReceita', function(req, res){
+routes.put('/EditarReceita', function(req, res){
 	ReceitaController.edit(req).then(() => {
 		PacienteController.findByPrimary(req.query.pacienteId).then(paciente => {
 			res.redirect('/PesquisaPaciente?nome=' + paciente.dataValues.nome);
@@ -164,4 +164,4 @@ router.put('/EditarReceita', function(req, res){
 });
 
 
-module.exports = router;
+module.exports = routes;

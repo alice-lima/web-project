@@ -1,7 +1,7 @@
 module.exports = {
   username: "root",
-  password: "",
+  password: "password123",
   database: "sinapseDB",
   host: "localhost",
-  dialect: "mysql",
+  dialect: "mysql"
 };

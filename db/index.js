@@ -1,11 +1,13 @@
 const Sequelize = require("sequelize");
-// const dbConfig = require("../config/database");
 
 const Consulta = require("./models/Consulta");
 
-const connection = new Sequelize("sinapseDB", "root", "", {
+const connection = new Sequelize("sinapseDB", "root", "password123", {
   host: "localhost",
-  dialect: "mysql"
+  dialect: "mysql",
+  define: {
+    timestamps: false
+  }
 });
 
 Consulta.init(connection);
