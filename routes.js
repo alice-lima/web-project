@@ -161,4 +161,17 @@ router.get('/LoucuraAdicionar', function(req, res){
 	})
 });
 
+router.put('/EditarReceita', function(req, res){
+	ReceitaController.edit(req).then(() => {
+		PacienteController.findByPrimary(req.query.pacienteId).then(paciente => {
+			ReceitaController.findByPaciente(paciente.dataValues.id).then(receitas => {
+				MedicacaoController.findMedPaciente(receitas).then(medicacoes => {
+					res.render('Consulta', {paciente: paciente.dataValues, receitas: receitas, medicacoes: medicacoes, titulo: 'Consulta'});
+				})
+			})
+		})
+	})
+});
+
+
 module.exports = router;
