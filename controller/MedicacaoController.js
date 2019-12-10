@@ -8,18 +8,16 @@ module.exports = {
         const medicacoes =[];
         for (const receita of receitas) {
             let medicacao = await Medicacao.findOne({where: {id: receita.dataValues.medicacoId}});
-            console.log(medicacao);
 
             medicacoes.push(medicacao);
         }
-        console.log("medicacoes" + medicacoes);
         return medicacoes;
 
          
     },
 
     async findByAtt(req) {
-        const medicacao = await models.Medicacao.findOne({
+        const medicacao = await Medicacao.findOne({
             where : {
                 classeTerapeutica: req.body.classeTerapeutica,
                 viaAdministracao: req.body.viaAdministracao,
@@ -27,6 +25,16 @@ module.exports = {
             }
         })
         return medicacao;
+    },
+
+    async findByPrimary(medicacoId){
+       const medicacao = await Medicacao.findOne({
+            where: {
+                id: medicacoId
+            }
+        });
+        return medicacao;
+
     }
     
 }

@@ -66,10 +66,8 @@
 				</div>
 				<form id="form" action="/AddMedicacaoPaciente" method="post" enctype="application/json" class="card">
 					<div>
-						<input name="pacienteId" type="hidden" value= <%= paciente.id %> >
-					</div>
-					<div>
-						<input name="pacienteNome" type="hidden" value="Caio">
+						<input id="pacienteId" name="pacienteId" type="hidden" value= <%= paciente.id %> >
+						<input id="medicacoId" name="medicacoId" type="hidden" value="">
 					</div>
 
 					<div class="card-body">
@@ -155,13 +153,13 @@
 								</div>	
 								<div class="form-group col-md-3">
 									<label>Prescrição</label> 
-									<input name="prescricao" value=<%= new Date().toLocaleDateString("pt-BR") %> class="form-control" type="text" placeholder="Ex.: dd/mm/aaaa" data-mask="00/00/0000" maxlength="10" autocomplete="off">
+									<input name="prescricao" value=<%= new Date().toLocaleDateString("pt-br") %> class="form-control" type="text" placeholder="Ex.: dd/mm/aaaa" data-mask="00/00/0000" maxlength="10" autocomplete="off">
 								</div>
 						</div>
 					</div>
 					<div class="linha">
 						<button class="btn btn-outline-primary col-md-3">Histórico de Receitas</button>
-						<div class="col-md-6 "></div>
+						<div id="divEdicao" class="col-md-6"></div>
 						<button type="submit" class="btn btn-outline-primary col-md-3">Gerar Receita</button>
 					</div>
 				</form>
@@ -189,15 +187,18 @@
 					<div class="card-body">
 						<h5 class="card-header">Retorno</h5>
 					</br>
-						<div class="form-group">
+						<div class="form-group" method="get" enctype="application/json">
 							<label for="inputMedico">Nome do Médico</label>
-							<input type="text" class="form-control" id="inputMedico">
+							<select class="form-control" id="inputMedico" onchange="preencherMedico()">
+									<% medicos.map((medico)=>{%>
+										<option value= "<%= JSON.stringify(medico)%>" ><%= medico.nome %></option>
+									<%}) %>
+							</select>
 						</div>
 						<div class="form-row">
 							<div class="form-group col-md-6">
 								<label for="tipo">Especialidade Médica</label>
-								<select id="tipo" class="form-control">
-									<option>Selecione</option>
+								<select id="especialidadeMedico" class="form-control">
 									<option value="Cardiologista">Cardiologista</option>
 									<option value="Cirurgião Geral">Cirurgião Geral</option>
 									<option value="Clínico Geral">Clínico Geral</option>
@@ -206,7 +207,7 @@
 									<option value="Oncologista">Oncologista</option>
 									<option value="Ortopedista">Ortopedista</option>
 									<option value="Otorrinolaringologista">Otorrinolaringologista</option>
-									<option value="Pediatria">Pediatria</option>
+									<option value="Pediatra">Pediatra</option>
 								</select>
 							</div>
 							<div class="form-group col-md-6">
@@ -262,23 +263,23 @@
 							</thead>
 							<tbody>
 								<% receitas.forEach(function(receita, index){ %>
-									<tr id=<%- receita.dataValues.pacienteId, receita.dataValues.medicacoId %>>
-										<th><%= medicacoes[index].dataValues.classeTerapeutica %></th>
-										<th><%= medicacoes[index].dataValues.viaAdministracao %></th>
-										<th><%= medicacoes[index].dataValues.unidade %></th>
-										<th><%= receita.dataValues.prescricao %></th>
-										<th><%= receita.dataValues.dosagem %></th>
-										<th><%= receita.dataValues.frequencia %></th>
-										<th><%= receita.dataValues.duracao %></th>
-										<th><%= receita.dataValues.usoContinuo %></th>
-										<th><button onclick="deleteReceita( '<%- receita.dataValues.pacienteId + ',' + receita.dataValues.medicacoId %>' )">Excluir</button></th>
+									<tr id=<%= receita.dataValues.medicacoId %>>
+										<th class="classeTerapeutica"><%= medicacoes[index].dataValues.classeTerapeutica %></th>
+										<th class="viaAdministracao"><%= medicacoes[index].dataValues.viaAdministracao %></th>
+										<th class="unidade"><%= medicacoes[index].dataValues.unidade %></th>
+										<th class="prescricao"><%= receita.dataValues.prescricao %></th>
+										<th class="dosagem"><%= receita.dataValues.dosagem %></th>
+										<th class="frequencia"><%= receita.dataValues.frequencia %></th>
+										<th class="duracao"><%= receita.dataValues.duracao %></th>
+										<th class="usoContinuo"><%= receita.dataValues.usoContinuo %></th>
+										<th><button onclick="iniciarEdicao(<%= receita.dataValues.medicacoId %>)">Editar</button><button onclick="deleteReceita( '<%- receita.dataValues.pacienteId + ',' + receita.dataValues.medicacoId %>' )">Excluir</button></th>
 									</tr>	
 								<% }) %>
 								
 								
 							</tbody>
 						</table>
-					</div>''
+					</div>
 				</div>
 			</div>
 		</div>

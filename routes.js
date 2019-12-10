@@ -45,16 +45,12 @@ routes.post("/Login", function(req, res) {
 //rotas da página menu
 
 //rotas da página CadMedico
-routes.post("/CadastrarMedico", function(req, res) {
-  console.log(req.body);
-  MedicoController.create(req)
-    .then(function() {
-      console.log("medico inserido com sucesso");
-      res.render("Menu");
-    })
-    .catch(function(erro) {
-      res.send("Houve um erro: " + erro);
-    });
+router.post('/CadastrarMedico', function(req, res){
+	MedicoController.create(req).then(function(){
+	res.render('Menu');
+	}).catch(function(erro){
+		res.send("Houve um erro: " + erro);
+	})
 });
 
 //rotas da página Paciente
@@ -84,99 +80,61 @@ routes.get("/Consulta", function(req, res) {
   res.render("Consulta", { titulo: "Consulta" });
 });
 
-routes.get("/PesquisaPaciente", function(req, res) {
-  models.Paciente.findOne({
-    where: {
-      nome: req.query.nome
-    }
-  }).then(paciente => {
-    if (paciente) {
-      ReceitaController.findByPaciente(paciente.dataValues.id).then(
-        receitas => {
-          MedicacaoController.findMedPaciente(receitas).then(medicacoes => {
-            res.render("Consulta", {
-              paciente: paciente.dataValues,
-              receitas: receitas,
-              medicacoes: medicacoes,
-              titulo: "Consulta"
-            });
-          });
-        }
-      );
-    } else {
-      res.render("Menu");
-    }
-  });
+router.get('/PesquisaPaciente', function(req, res){
+	PacienteController.findByName(req).then(paciente => {
+		if(paciente) {
+			ReceitaController.findByPaciente(paciente.dataValues.id).then((receitas) => {
+				MedicacaoController.findMedPaciente(receitas).then((medicacoes) => {
+					MedicoController.getAll().then((medicos) => {
+						res.render('Consulta', {
+							paciente: paciente.dataValues,
+							receitas: receitas,
+							medicacoes: medicacoes, 
+							medicos: medicos, 
+							titulo: 'Consulta'
+						});
+					})
+				})
+			}).catch(erro => {
+				console.log("Houve um erro: " + erro);
+			})
+		}
+		else {
+			res.render("Menu");
+		}		
+	}).catch(erro => {
+		console.log("Houve um erro: " + erro);
+	})
 });
 
 //rotas da página Consulta
-routes.post("/AddMedicacaoPaciente", function(req, res) {
-  MedicacaoController.findByAtt(req).then(medicacao => {
-    ReceitaController.findByPrimary(
-      req.body.pacienteId,
-      medicacao.dataValues.id
-    )
-      .then(receita => {
-        if (receita) {
-          /*var values = {
-					dosagem: req.body.dosagem,
-					frequencia: req.body.frequencia,
-					duracao: req.body.duracao,
-					continuo: req.body.continuo,
-					emUso: req.body.emUso,
-					prescricao: req.body.prescricao};
-				var condition = { where :{
-					pacienteId: receita.pacienteId,
-					medicacoId: receita.medicacoId} };
-				var options = { multi: true };
-				
-				models.Receita.update(values, condition , options); */
-        } else {
-          ReceitaController.create(req, medicacao.dataValues.id).then(() => {
-            PacienteController.findByPrimary(req.body.pacienteId).then(
-              paciente => {
-                ReceitaController.findByPaciente(paciente.dataValues.id).then(
-                  receitas => {
-                    MedicacaoController.findMedPaciente(receitas).then(
-                      medicacoes => {
-                        let pacienteNome = paciente.dataValues.nome.replace(
-                          " ",
-                          "+"
-                        );
-                        console.log(pacienteNome);
-                        res.redirect("/PesquisaPaciente?nome=" + pacienteNome);
-                      }
-                    );
-                  }
-                );
-              }
-            );
-          });
-        }
-      })
-      .catch(erro => {
-        console.log("Houve um erro " + erro);
-      });
-  });
+router.post('/AddMedicacaoPaciente', function(req, res){
+	MedicacaoController.findByAtt(req).then(medicacao => {
+		ReceitaController.findByPrimary(req.body.pacienteId, medicacao.dataValues.id).then(receita => {
+			if(!receita){
+				ReceitaController.create(req, medicacao.dataValues.id).then(() => {
+					PacienteController.findByPrimary(req.body.pacienteId).then(paciente => {
+						res.redirect('/PesquisaPaciente?nome=' + paciente.dataValues.nome);
+					})
+				});
+			}
+			else{
+				PacienteController.findByPrimary(req.body.pacienteId).then(paciente => {
+					res.redirect('/PesquisaPaciente?nome=' + paciente.dataValues.nome);
+				})		
+			}
+		}).catch(erro => {
+			console.log("Houve um erro " + erro);
+		})
+	})
 });
 
-routes.delete("/ExcluirReceita", function(req, res) {
-  ReceitaController.delete(req).then(() => {
-    PacienteController.findByPrimary(req.body.pacienteId).then(paciente => {
-      ReceitaController.findByPaciente(paciente.dataValues.id).then(
-        receitas => {
-          MedicacaoController.findMedPaciente(receitas).then(medicacoes => {
-            res.render("Consulta", {
-              paciente: paciente.dataValues,
-              receitas: receitas,
-              medicacoes: medicacoes,
-              titulo: "Consulta"
-            });
-          });
-        }
-      );
-    });
-  });
+router.delete('/ExcluirReceita', function(req, res){
+	ReceitaController.delete(req).then(() => {
+		PacienteController.findByPrimary(req.query.pacienteId).then(paciente => {
+			res.redirect('/PesquisaPaciente?nome=' + paciente.dataValues.nome);
+		})
+	})
 });
 
 routes.get("/LoucuraAdicionar", function(req, res) {
@@ -195,4 +153,15 @@ routes.get("/LoucuraAdicionar", function(req, res) {
     });
 });
 
-module.exports = routes;
+router.put('/EditarReceita', function(req, res){
+	ReceitaController.edit(req).then(() => {
+		PacienteController.findByPrimary(req.query.pacienteId).then(paciente => {
+			res.redirect('/PesquisaPaciente?nome=' + paciente.dataValues.nome);
+		})
+	}).catch(erro => {
+		console.log("Houve um erro: " + erro);
+	})
+});
+
+
+module.exports = router;

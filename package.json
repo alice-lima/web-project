@@ -4,7 +4,9 @@
   "description": "projeto web para controle hospitalar",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon app.js",
+    "dev:debug": "nodemon --inspect app.js"
   },
   "repository": {
     "type": "git",

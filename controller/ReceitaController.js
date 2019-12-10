@@ -43,5 +43,20 @@ module.exports = {
         await this.findByPrimary(req.query.pacienteId, req.query.medicacoId).then(receita => {
             receita.destroy();
         })
+    },
+
+    async edit (req){
+        await this.findByPrimary(req.query.pacienteId, req.query.medicacoId).then(receita => {
+            receita.update({
+                dosagem: req.body.dosagem,
+                frequencia: req.body.frequencia,
+                prescricao: req.body.prescricao,
+                duracao: req.body.duracao
+            });
+        }).then(() => {
+            console.log("Editado com sucesso");
+        }).catch(erro => {
+            console.log("Houve um erro: " + erro);     
+        })
     }
 }

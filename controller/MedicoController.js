@@ -18,5 +18,13 @@ module.exports = {
         }
 
         await Medico.create(medico);
-    }
+	},
+	
+	async getAll () {
+		const medicos = await Medico.findAll({
+			attributes: ['nome', 'especialidade', 'crm']
+		})
+
+		return medicos
+	}
 }
