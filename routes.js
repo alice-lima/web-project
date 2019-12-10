@@ -79,7 +79,15 @@ router.get('/PesquisaPaciente', function(req, res){
 		if(paciente) {
 			ReceitaController.findByPaciente(paciente.dataValues.id).then((receitas) => {
 				MedicacaoController.findMedPaciente(receitas).then((medicacoes) => {
-					res.render('Consulta', {paciente: paciente.dataValues, receitas: receitas, medicacoes: medicacoes, titulo: 'Consulta'});
+					MedicoController.getAll().then((medicos) => {
+						res.render('Consulta', {
+							paciente: paciente.dataValues,
+							receitas: receitas,
+							medicacoes: medicacoes, 
+							medicos: medicos, 
+							titulo: 'Consulta'
+						});
+					})
 				})
 			})
 		}
@@ -152,6 +160,5 @@ router.get('/LoucuraAdicionar', function(req, res){
 		console.log("Houve um erro: " + erro);
 	})
 });
-
 
 module.exports = router;

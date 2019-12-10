@@ -137,13 +137,13 @@
                     type="password"
                     class="form-control"
                     placeholder="Confirmação de Senha"
-                    onblur="validaSenha()"
+                    onchange="validaSenha()"
                 >
             </div>
         </div>
 
         <div class="form justifyContentEnd">
-            <button class="btn btn-primary btn-lg" onclick="salvarMedico()">Salvar</button>
+            <button id="btnSalvar" class="btn btn-primary btn-lg" disabled onclick="salvarMedico()">Salvar</button>
         </div>
     </form>
 
