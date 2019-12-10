@@ -91,9 +91,7 @@ router.get('/PesquisaPaciente', function(req, res){
 router.post('/AddMedicacaoPaciente', function(req, res){
 	MedicacaoController.findByAtt(req).then(medicacao => {
 		ReceitaController.findByPrimary(req.body.pacienteId, medicacao.dataValues.id).then(receita => {
-			console.log("nao");
 			if(!receita){
-				console.log("entrou");
 				ReceitaController.create(req, medicacao.dataValues.id).then(() => {
 					PacienteController.findByPrimary(req.body.pacienteId).then(paciente => {
 						res.redirect('/PesquisaPaciente?nome=' + paciente.dataValues.nome);

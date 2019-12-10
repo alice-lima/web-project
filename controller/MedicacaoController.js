@@ -8,11 +8,9 @@ module.exports = {
         const medicacoes =[];
         for (const receita of receitas) {
             let medicacao = await Medicacao.findOne({where: {id: receita.dataValues.medicacoId}});
-            console.log(medicacao);
 
             medicacoes.push(medicacao);
         }
-        console.log("medicacoes" + medicacoes);
         return medicacoes;
 
          
