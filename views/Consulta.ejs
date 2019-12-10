@@ -189,17 +189,16 @@
 					</br>
 						<div class="form-group" method="get" enctype="application/json">
 							<label for="inputMedico">Nome do Médico</label>
-							<select class="form-control" id="inputMedico">
+							<select class="form-control" id="inputMedico" onchange="preencherMedico()">
 									<% medicos.map((medico)=>{%>
-										<option value=%= medico % ><%= medico.nome %></option>
-									  <%}) %>
+										<option value= "<%= JSON.stringify(medico)%>" ><%= medico.nome %></option>
+									<%}) %>
 							</select>
 						</div>
 						<div class="form-row">
 							<div class="form-group col-md-6">
 								<label for="tipo">Especialidade Médica</label>
-								<select id="tipo" class="form-control">
-									<option>Selecione</option>
+								<select id="especialidadeMedico" class="form-control">
 									<option value="Cardiologista">Cardiologista</option>
 									<option value="Cirurgião Geral">Cirurgião Geral</option>
 									<option value="Clínico Geral">Clínico Geral</option>
@@ -208,7 +207,7 @@
 									<option value="Oncologista">Oncologista</option>
 									<option value="Ortopedista">Ortopedista</option>
 									<option value="Otorrinolaringologista">Otorrinolaringologista</option>
-									<option value="Pediatria">Pediatria</option>
+									<option value="Pediatra">Pediatra</option>
 								</select>
 							</div>
 							<div class="form-group col-md-6">
